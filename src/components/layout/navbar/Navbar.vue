@@ -62,6 +62,20 @@
       <div class="col nav-item dropdown navbar-dropdown d-flex align-items-center justify-content-center" v-dropdown v-if="currentUser">
         <a class="nav-link dropdown-toggle d-flex align-items-center justify-content" href="#"
            @click.prevent="closeMenu">
+          <span class="fa fa-plus-circle" style="font-size: 2em"></span>
+        </a>
+        <div class="dropdown-menu">
+          <div class="dropdown-menu-content">
+            <router-link class="dropdown-item" to="/new">
+              <span>New Project</span>
+            </router-link>
+          </div>
+
+        </div>
+      </div>
+      <div class="col nav-item dropdown navbar-dropdown d-flex align-items-center justify-content-center" v-dropdown v-if="currentUser">
+        <a class="nav-link dropdown-toggle d-flex align-items-center justify-content" href="#"
+           @click.prevent="closeMenu">
           <span class="avatar-container">
             <img src="http://i.imgur.com/nfa5itq.png"/>
           </span>
