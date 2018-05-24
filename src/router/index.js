@@ -1,17 +1,18 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from 'vue';
+import Router from 'vue-router';
 
-import menuModule from 'vuex-store/modules/menu'
+import menuModule from 'vuex-store/modules/menu';
+import Overview from '@/components/dashboard/Overview';
 
-Vue.use(Router)
+Vue.use(Router);
 
-const demoRoutes = []
+const demoRoutes = [];
 if (process.env.NODE_ENV === 'development') {
-  const VueComponentTree = require('vue-component-tree').default
+  const VueComponentTree = require('vue-component-tree').default;
 
   demoRoutes.push(
     VueComponentTree(require.context('./..', true, /.demo.vue$/), '/demo')
-  )
+  );
 }
 
 export default new Router({
@@ -21,34 +22,41 @@ export default new Router({
     {
       path: '*',
       redirect: { name: getDefaultRoute(menuModule.state.items).name }
+    },
+    {
+      path: 'projects/:project',
+      component: Overview,
+      meta: {
+        auth: true
+      }
     }
   ]
-})
+});
 
-function generateRoutesFromMenu (menu = [], routes = []) {
+function generateRoutesFromMenu(menu = [], routes = []) {
   for (let i = 0, l = menu.length; i < l; i++) {
-    let item = menu[i]
+    let item = menu[i];
     if (item.path) {
-      routes.push(item)
+      routes.push(item);
     }
     if (item.children) {
-      generateRoutesFromMenu(item.children, routes)
+      generateRoutesFromMenu(item.children, routes);
     }
   }
-  return routes
+  return routes;
 }
 
-function getDefaultRoute (menu = []) {
-  let defaultRoute
+function getDefaultRoute(menu = []) {
+  let defaultRoute;
 
   menu.forEach(item => {
     if (item.meta.default) {
-      defaultRoute = item
+      defaultRoute = item;
     } else if (item.children) {
-      let defaultChild = item.children.find(i => i.meta.default)
-      defaultRoute = defaultChild || defaultRoute
+      let defaultChild = item.children.find(i => i.meta.default);
+      defaultRoute = defaultChild || defaultRoute;
     }
-  })
+  });
 
-  return defaultRoute
+  return defaultRoute;
 }
