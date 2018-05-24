@@ -14,6 +14,9 @@
             <span class="badge badge-warning" v-else>Incomplete</span>
           </div>
           <h3>{{project.title}}</h3>
+          <div style="margin-left:3px; opacity:0.9;">
+            <small class="text-info" style="margin-right:5px;padding:2px 5px;" :key="tag" v-for="tag in project.tags" :tag="tag">{{tag}}</small>
+          </div>
           <hr style="clear: both">
           <div>
             <small>
@@ -43,8 +46,9 @@
       </vuestic-tabs>
     </vuestic-widget>
 -->
+<!--
     <dashboard-bottom-widgets></dashboard-bottom-widgets>
-
+-->
   </div>
 </template>
 
@@ -67,7 +71,7 @@
       FeaturesTab,
       DashboardBottomWidgets
     },
-    computed:{
+    computed: {
       currentUser(){
         return this.$store.state.app.currentUser
       }

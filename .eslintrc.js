@@ -24,7 +24,7 @@ module.exports = {
     'no-multiple-empty-lines': 0,
     'no-mixed-operators': 0,
     'space-before-function-paren': 0,
-    'space-before-blocks': 2,
+    'space-before-blocks': 0,
     'key-spacing': 2,
     indent: ['error', 2],
     // allow debugger during development

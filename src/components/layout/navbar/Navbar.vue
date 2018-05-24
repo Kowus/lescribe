@@ -72,7 +72,8 @@
               <span class="text-light">{{currentUser.username}}</span>
             </div>
             <div class="dropdown-item plain-link-item">
-              <a class="plain-link" href="#">{{'user.profile' | translate}}</a>
+              <!-- <a class="plain-link" href="#">{{'user.profile' | translate}}</a> -->
+              <router-link to="/dashboard" class="plain-link">{{'user.profile'|translate}}</router-link>
             </div>
             <div class="dropdown-item plain-link-item">
               <p style="width:100%" class="plain-link" @click="logout()">{{'user.logout' | translate}}</p>
