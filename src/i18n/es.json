@@ -11,6 +11,14 @@
     "termsOfUse": "Los terminos de uso",
     "welcome": "Bienvenido!"
   },
+  "new": {
+    "title": "New Project",
+    "project_title": "Project Title",
+    "description": "Description",
+    "start_date": "Project Start Date",
+    "public": "Public",
+    "private": "Private"
+  },
   "buttons": {
     "advanced": "Iconos, Grupos, Dropdowns",
     "button": "BOTON",
@@ -34,7 +42,8 @@
   "dashboard": {
     "elements": "Elementos",
     "success": "ÉXITO",
-    "successMessage": "Ha leído correctamente este mensaje de alerta importante.",
+    "successMessage":
+      "Ha leído correctamente este mensaje de alerta importante.",
     "teamMembers": "Miembros del Equipo",
     "versions": "Versiones"
   },
@@ -42,9 +51,11 @@
     "alerts": {
       "title": "Alerts",
       "success": "ÉXITO",
-      "successMessage": "Ha leído correctamente este mensaje de alerta importante.",
+      "successMessage":
+        "Ha leído correctamente este mensaje de alerta importante.",
       "info": "INFO",
-      "infoMessage": "Esta alerta necesita tu atención, pero no es muy importante.",
+      "infoMessage":
+        "Esta alerta necesita tu atención, pero no es muy importante.",
       "warning": "ADVERTENCIA",
       "warningMessage": "Mejor compruébalo, esto no pinta bien.",
       "danger": "PELIGRO",

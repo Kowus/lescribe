@@ -19,29 +19,33 @@
       Layout
     },
     created(){
-      if(this.$auth.loggedIn()){
-        this.getCurrentUser()
-      }
-      else {
-        this.$store.commit('clearCurrentUser');
-      }
+      this.getCurrentUser()
     },
     computed: {
       isAuth () {
         return this.$route.path.match('auth')
       }
     },
-    methods:{
+    methods: {
+
       getCurrentUser(){
-        this.$http
-        .get('/user/me')
-        .then(res => {
-          this.$store.commit('setCurrentUser', res.data);
-        })
-        .catch(res => {
-          this.$store.commit('clearCurrentUser');
-        });
+        if(this.$auth.loggedIn()){
+          this.$http
+          .get('/user/me')
+          .then(res => {
+            this.$store.commit('setCurrentUser', res.data);
+          })
+          .catch(res => {
+            this.$store.commit('clearCurrentUser');
+          });
       }
+      else {
+        this.$store.commit('clearCurrentUser');
+      }
+      }
+    },
+    watch:{
+      $route: 'getCurrentUser'
     }
   }
 </script>

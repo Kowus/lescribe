@@ -30,7 +30,6 @@ Vue.axios.interceptors.request.use(
     if (token) {
       config.headers.common['Authorization'] = `Bearer ${token}`;
     }
-    console.log(config);
     return config;
   },
   function(error) {

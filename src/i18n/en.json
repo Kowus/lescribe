@@ -15,6 +15,14 @@
   "breadcrumbs": {
     "home": "Home"
   },
+  "new": {
+    "title": "New Project",
+    "project_title": "Project Title",
+    "description": "Description",
+    "start_date": "Project Start Date",
+    "public": "Public",
+    "private": "Private"
+  },
   "buttons": {
     "advanced": "Icons, Groups, Dropdowns",
     "button": "BUTTON",

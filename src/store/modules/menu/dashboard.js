@@ -1,4 +1,4 @@
-import lazyLoading from './lazyLoading'
+import lazyLoading from './lazyLoading';
 
 export default {
   name: 'Dashboard',
@@ -10,4 +10,4 @@ export default {
     iconClass: 'vuestic-icon vuestic-icon-dashboard',
     auth: true
   }
-}
+};
