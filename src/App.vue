@@ -6,6 +6,7 @@
 </template>
 
 <script>
+/* eslint-disable */
   import Layout from 'components/layout/Layout'
   import AuthLayout from 'components/layout/AuthLayout'
   import VuesticPreLoader from 'vuestic-components/vuestic-preloader/VuesticPreLoader.vue'
@@ -17,9 +18,29 @@
       AuthLayout,
       Layout
     },
+    created(){
+      if(this.$auth.loggedIn()){
+        this.getCurrentUser()
+      }
+      else {
+        this.$store.commit('clearCurrentUser');
+      }
+    },
     computed: {
       isAuth () {
         return this.$route.path.match('auth')
+      }
+    },
+    methods:{
+      getCurrentUser(){
+        this.$http
+        .get('/user/me')
+        .then(res => {
+          this.$store.commit('setCurrentUser', res.data);
+        })
+        .catch(res => {
+          this.$store.commit('clearCurrentUser');
+        });
       }
     }
   }

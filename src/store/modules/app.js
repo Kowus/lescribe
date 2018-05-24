@@ -1,4 +1,4 @@
-import * as types from '../mutation-types'
+import * as types from '../mutation-types';
 
 const state = {
   sidebar: {
@@ -23,40 +23,47 @@ const state = {
       lighterGray: '#ddd'
     }
   },
-  isLoading: true
-}
+  isLoading: true,
+  currentUser: {}
+};
 
 const mutations = {
-  [types.CLOSE_MENU] (state) {
+  [types.CLOSE_MENU](state) {
     if (document.documentElement.clientWidth < 992) {
-      state.sidebar.opened = false
+      state.sidebar.opened = false;
     }
   },
-  [types.TOGGLE_SIDEBAR] (state, opened) {
-    state.sidebar.opened = opened
+  [types.TOGGLE_SIDEBAR](state, opened) {
+    state.sidebar.opened = opened;
   },
-  [types.TOGGLE_WITHOUT_ANIMATION] (state, value) {
-    state.sidebar.withoutAnimation = value
+  [types.TOGGLE_WITHOUT_ANIMATION](state, value) {
+    state.sidebar.withoutAnimation = value;
   },
-  setLoading (state, isLoading) {
-    state.isLoading = isLoading
+  setLoading(state, isLoading) {
+    state.isLoading = isLoading;
+  },
+  setCurrentUser(state, object) {
+    state.currentUser = object;
+  },
+  clearCurrentUser(state) {
+    state.currentUser = {};
   }
-}
+};
 
 const actions = {
-  closeMenu ({ commit }) {
-    commit(types.CLOSE_MENU)
+  closeMenu({ commit }) {
+    commit(types.CLOSE_MENU);
   },
-  toggleSidebar ({ commit }, opened) {
-    commit(types.TOGGLE_SIDEBAR, opened)
+  toggleSidebar({ commit }, opened) {
+    commit(types.TOGGLE_SIDEBAR, opened);
   },
-  isToggleWithoutAnimation ({ commit }, value) {
-    commit(types.TOGGLE_WITHOUT_ANIMATION, value)
+  isToggleWithoutAnimation({ commit }, value) {
+    commit(types.TOGGLE_WITHOUT_ANIMATION, value);
   }
-}
+};
 
 export default {
   state,
   mutations,
   actions
-}
+};

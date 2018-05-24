@@ -59,7 +59,7 @@
         </div>
       </div>
       <language-selector :options="langs"></language-selector>
-      <div class="col nav-item dropdown navbar-dropdown d-flex align-items-center justify-content-center" v-dropdown>
+      <div class="col nav-item dropdown navbar-dropdown d-flex align-items-center justify-content-center" v-dropdown v-if="currentUser">
         <a class="nav-link dropdown-toggle d-flex align-items-center justify-content" href="#"
            @click.prevent="closeMenu">
           <span class="avatar-container">
@@ -69,10 +69,13 @@
         <div class="dropdown-menu last">
           <div class="dropdown-menu-content">
             <div class="dropdown-item plain-link-item">
+              <span class="text-light">{{currentUser.username}}</span>
+            </div>
+            <div class="dropdown-item plain-link-item">
               <a class="plain-link" href="#">{{'user.profile' | translate}}</a>
             </div>
             <div class="dropdown-item plain-link-item">
-              <a class="plain-link" href="#">{{'user.logout' | translate}}</a>
+              <p style="width:100%" class="plain-link" @click="logout()">{{'user.logout' | translate}}</p>
             </div>
           </div>
         </div>
@@ -82,6 +85,7 @@
 </template>
 
 <script>
+/* eslint-disable */
   import {mapGetters, mapActions} from 'vuex'
   import LanguageSelector from './LanguageSelector'
 
@@ -111,7 +115,10 @@
       ...mapGetters([
         'sidebarOpened',
         'toggleWithoutAnimation'
-      ])
+      ]),
+      currentUser(){
+        return this.$store.state.app.currentUser
+      }
     },
 
     methods: {
@@ -119,7 +126,12 @@
         'closeMenu',
         'toggleSidebar',
         'isToggleWithoutAnimation'
-      ])
+      ]),
+      logout(){
+        this.$auth.destroyToken();
+        this.$router.push("/auth/login");
+        this.$store.commit("clearCurrentUser");
+      }
     }
   }
 </script>
