@@ -7,7 +7,7 @@
             <h1>Girl, no you don’t</h1>
 
             <p>
-              <i>Every time a straight girl tells me “I wish I was a lesbian”, I want to light myself on fire.</i>
+              <i>'Thank you,' the old man said. He was too simple to wonder when he had attained humility. But he knew he had attained it and he knew it was not disgraceful and it carried no loss of true pride.</i>
             </p>
 
             <p>
@@ -16,42 +16,22 @@
 
 
             <p>
-              You enter into your favorite local bar looking <b class="default-selection">good</b> as hell, but you know the only heads you want to turn — spicy & stylish alpha bitches — are heavily
-              fixated on the D. The hot girl talks to you, but she only wants to be your best friend. Her nonthreatening and attentive best friend. Receiver of sexy
-              selfies, listener of stories. Meanwhile, you attract unwanted attention from straight men, pudgy and greasy moths to your emotionally distant flame.
+              He always thought of the sea as la mar which is what people call her in Spanish when they love her. Sometimes those who love her say bad things of her but they are always said as though she were a woman. Some of the younger fishermen, those who used buoys as floats for their lines and had motorboats, bought when the shark livers had brought much money, spoke of her as el mar which is masculine. The spoke of her as a contestant or a place or even an enemy. But the old man always thought of her as feminine and as something that gave or withheld great favours, and if she did wild or wicked things it was because she could not help them. The moon affects her as it does a woman, he thought.
             </p>
-
-            <h3>
-              The only place you can go out and feel desired is a <i>lesbian</i> party. There is a reason lesbian bars no longer exist. Women aren’t taught to approach each
-              other. We’re taught to cross our arms and judge. You worry about the shape of your eyebrows now? The stage of your roots? You haven’t felt fully judged
-              until you’ve been in a room full of scowling women who want to fuck each other.
-            </h3>
-
             <p>
-              For years, your friends, family members, and medical professionals will doubt your continued homosexual confessions. They will tell you that you “haven’t
-              met the right man.” Sex with women is fine. That’s allowed. You can be “experimental,” a titillating object of the male gaze. You can be fluid. But you
-              want to partner with a woman? No no. You must be mistaken. You tend to believe them, because you’ve been conditioned to disbelieve yourself, to instead
-              defer to the voices of others.
+              He had no mysticism about turtles although he had gone in turtle boats for many years. He was sorry for them all, even the great trunk backs that were as long as the skiff and weighed a ton. Most people are heartless about turtles because a turtle's heart will beat for hours after he has been cut up and butchered. But the old man thought, I have such a heart too and my feat and hands are like theirs.
             </p>
 
             <p>
-              You will experience years of confusion about your sexuality, because you haven’t been taught to prioritize your own sexual desire. None of your female
-              friends orgasm anyway. And if they do, it’s definitely not from penetration. Everyone’s a little in love with their best friend, right? Maybe you just
-              haven’t met the right man.
+              When once, through my treachery, it had been necessary to [the marlin] to make a choice, the old man thought. His choice had been to stay in the deep dark water far out beyond all snares and traps and treacheries. My choice was to go there to find him beyond all people. Beyond all people in the world. Now we are joined together and have been since noon. And no one to help either one of us.
             </p>
 
             <p>
-              The word “crazy” continues to come up whenever you discuss your love life, because mainstream society still associates lesbian love with mental
-              instability. If you’re femme-presenting, you will hear wildly homophobic statements in your presence. You will hear people opine about single brothers,
-              cousins, uncles who are “obviously gay,” which doesn’t bother you. But then you’ll hear them mention their unhinged friend, about whom they express a
-              performative concern, tinged with excitement: “She went to rehab and then she dated a woman…. That’s just Crazy Carrie for you!”
-            </p>
-
-            <p>
-              A family member to tell you that your your “alarming lifestyle” has required them to seek therapy. Your mom will tell you that she “supports you no
-              matter what” but that it would be “much easier for everyone if you dated a man.” Your love life will become a burden, something that frightens people.
-              You will go to the Deep South for the holidays and your Grandmother will quite literally scream when you confirm her suspicions that you do, in fact,
-              have a girlfriend...
+              ...he thought much and he kept on thinking about sin. You did not kill the fish only to keep alive and to sell for food, he thought. You killed him for pride and because you are a fisherman. You loved him when he was alive and you loved him after. If you love hi, it is not a sin to kill him. Or is it more?
+              'You think too much, old man,' he said aloud.
+              But you enjoyed killing the dentuso [a shark who had attacked the dead marlin strapped to the boat], he thought. He lives on the live fish as you do. He is not a scavenger nor just a moving appetite as some sharks are. He is beautiful and noble and knows no fear of anything.
+              'I killed him in self-defense,' the old man said aloud. 'And I killed him well.'
+              Besides, he thought, everything kills everything else in some way. Fishing kills me exactly as it keeps me alive. The boy keeps me alive, he thought. I must not deceive myself too much.
             </p>
 
             <p>
@@ -90,8 +70,8 @@
               'h2',
               'h3',
               'quote',
-              'indent',
               'outdent',
+              'indent',
               'spreadsheet'
             ]
           }

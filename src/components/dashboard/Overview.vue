@@ -22,8 +22,10 @@
           </div>
           <hr>
           <div>
-            <h4>Overview</h4>
+            <h5>Overview</h5>
+            <vuestic-medium-editor @initialized="handleEditorInitialization" :editor-options="editorOptions" v-html="project.overview">
 
+            </vuestic-medium-editor>
           </div>
 
         </div>
@@ -41,7 +43,30 @@ export default {
   },
   data(){
     return {
-      project: {}
+      project: {},
+      editor:{},
+      editorOptions:{
+        autoLink: true,
+        buttonLabels: 'fontawesome',
+        toolbar: {
+          buttons: [
+            'bold',
+            'italic',
+            'underline',
+            'anchor',
+            'h1',
+            'h2',
+            'h3',
+            'h4',
+            'h5',
+            'h6',
+            'quote',
+            'outdent',
+            'indent',
+            'spreadsheet'
+          ]
+        }
+      }
     }
   },
   methods: {
@@ -53,6 +78,12 @@ export default {
           this.project = res.data
         });
     },
+    handleEditorInitialization (editor) {
+        this.editor = editor
+        this.$nextTick(() => {
+          // this.highlightSampleText()
+        })
+      },
     moment
   },
   watch: {
