@@ -38,6 +38,9 @@
             </ul>
           </expanding>
         </li>
+        <li>
+          <a href="#" class="sidebar-link"><i class="sidebar-menu-item-icon"></i> Logout</a>
+        </li>
       </ul>
     </vuestic-scrollbar>
 
