@@ -189,7 +189,8 @@
 
       .sidebar-menu-item-icon {
         font-size: $sidebar-menu-item-icon-size;
-        color: $vue-green;
+        color: $theme-red;
+        // color: $vue-green;
         margin-right: 14px;
 
         &.fa-dashboard {

@@ -4,6 +4,7 @@
     <dashboard-info-widgets></dashboard-info-widgets>
 -->
     <vuestic-widget class="no-padding no-v-padding" v-for="project in currentUser.projects" :project="project" :key="project._id">
+
       <div class="typo-headers">
         <div style="padding: 20px">
           <div class="float-right">
@@ -13,7 +14,7 @@
             <span class="badge badge-primary" v-if="project.completed.status">Completed</span>
             <span class="badge badge-warning" v-else>Incomplete</span>
           </div>
-          <h3>{{project.title}}</h3>
+          <h3><router-link :to="'/projects/'+project.permalink">{{project.title}}</router-link></h3>
           <div style="margin-left:3px; opacity:0.9;">
             <small class="text-info" style="margin-right:5px;padding:2px 5px;" :key="tag" v-for="tag in project.tags" :tag="tag">{{tag}}</small>
           </div>
@@ -25,6 +26,7 @@
           </div>
         </div>
       </div>
+
     </vuestic-widget>
 <!--
     <vuestic-widget class="no-padding no-v-padding">

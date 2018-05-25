@@ -1,8 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-
 import menuModule from 'vuex-store/modules/menu';
-import Overview from '@/components/dashboard/Overview';
+import lazyLoading from '../store/modules/menu/lazyLoading';
 
 Vue.use(Router);
 
@@ -17,18 +16,20 @@ if (process.env.NODE_ENV === 'development') {
 
 export default new Router({
   routes: [
+    {
+      name: 'Project',
+      path: '/projects/:project',
+      component: lazyLoading('dashboard/Overview'),
+      meta: {
+        title: 'Project',
+        auth: true
+      }
+    },
     ...demoRoutes,
     ...generateRoutesFromMenu(menuModule.state.items),
     {
       path: '*',
       redirect: { name: getDefaultRoute(menuModule.state.items).name }
-    },
-    {
-      path: 'projects/:project',
-      component: Overview,
-      meta: {
-        auth: true
-      }
     }
   ]
 });

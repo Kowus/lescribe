@@ -65,6 +65,7 @@
 </template>
 
 <script>
+  import Spreadsheet from 'medium-editor-handsontable'
   export default {
     name: 'medium-editor',
 
@@ -72,8 +73,13 @@
       return {
         editor: {},
         editorOptions: {
-          buttonLabels: 'fontawesome',
           autoLink: true,
+          buttonLabels: 'fontawesome',
+          disableEditing: false,
+          static: true,
+          extensions: {
+            spreadsheet: new Spreadsheet()
+          },
           toolbar: {
             buttons: [
               'bold',
@@ -82,7 +88,11 @@
               'anchor',
               'h1',
               'h2',
-              'h3'
+              'h3',
+              'quote',
+              'indent',
+              'outdent',
+              'spreadsheet'
             ]
           }
         }
@@ -93,7 +103,7 @@
       handleEditorInitialization (editor) {
         this.editor = editor
         this.$nextTick(() => {
-          this.highlightSampleText()
+          // this.highlightSampleText()
         })
       },
 
@@ -101,6 +111,9 @@
         let sampleText = document.getElementsByClassName('default-selection')[0]
         this.editor.selectElement(sampleText)
       }
+    },
+    watch: {
+
     }
   }
 </script>
