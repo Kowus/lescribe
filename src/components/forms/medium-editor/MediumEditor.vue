@@ -4,7 +4,7 @@
       <div class="col-md-12">
         <vuestic-widget :headerText="'forms.mediumEditor.title' | translate">
           <vuestic-medium-editor @initialized="handleEditorInitialization" :editor-options="editorOptions">
-            <h1>Girl, no you don’t</h1>
+            <h1>The Old Man and the Sea</h1>
 
             <p>
               <i>'Thank you,' the old man said. He was too simple to wonder when he had attained humility. But he knew he had attained it and he knew it was not disgraceful and it carried no loss of true pride.</i>
@@ -46,6 +46,8 @@
 
 <script>
   import Spreadsheet from 'medium-editor-handsontable'
+  import Autolist from 'medium-editor-autolist'
+
   export default {
     name: 'medium-editor',
 
@@ -56,24 +58,37 @@
           autoLink: true,
           buttonLabels: 'fontawesome',
           disableEditing: false,
-          static: true,
+          spellcheck: true,
           extensions: {
-            spreadsheet: new Spreadsheet()
+            spreadsheet: new Spreadsheet(),
+            autolist: new Autolist()
           },
           toolbar: {
+            static: true,
+            sticky: true,
             buttons: [
               'bold',
               'italic',
               'underline',
+              'strikethrough',
+              'subscript',
+              'superscript',
               'anchor',
               'h1',
               'h2',
               'h3',
               'quote',
+              'justifyLeft',
+              'justifyCenter',
+              'justifyRight',
+              'justifyFull',
               'outdent',
               'indent',
+              // 'image',
+              'orderedlist',
+              'unorderedlist',
               'spreadsheet'
-            ]
+            ],
           }
         }
       }
@@ -99,5 +114,7 @@
 </script>
 
 <style lang="scss">
+// @import '';
+// @import '/static/stylesheets/medium-editor-tables.min.css';
 
 </style>

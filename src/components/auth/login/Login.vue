@@ -42,7 +42,11 @@ import moment from 'moment';
             this.$http.post('/login', this.user)
               .then(res => {
                 this.$auth.setToken(res.data.token, moment().add(6, "h"));
-                this.$router.push('/dashboard');
+                if(this.$route.query.redirect){
+                  this.$router.push(this.$route.query.redirect)
+                }
+                else
+                  this.$router.push('/dashboard');
               }).catch(error => {
                 console.error(error);
 

@@ -22,10 +22,15 @@
           </div>
           <hr>
           <div>
+            <div class="float-right">
+              <a href class="badge" :class="cur_editing === 'overview'? 'badge-info': 'badge-dark'" @click.prevent="editableState('overview')">{{cur_editing === 'overview'? 'Save': 'Edit'}}</a>
+            </div>
             <h5>Overview</h5>
-            <vuestic-medium-editor @initialized="handleEditorInitialization" :editor-options="editorOptions" v-html="project.overview">
-
+            <div class="clearfix"></div>
+            <vuestic-medium-editor @initialized="handleEditorInitialization" :editor-options="editorOptions" :contenteditable="cur_editing == 'overview'" v-html="project.overview">
             </vuestic-medium-editor>
+
+
           </div>
 
         </div>
@@ -35,7 +40,12 @@
 </template>
 
 <script>
+/* eslint-disable */
+import Autolist from 'medium-editor-autolist'
+import Spreadsheet from 'medium-editor-handsontable'
 import moment from 'moment'
+
+
 export default {
   name: 'Overview',
   created(){
@@ -44,27 +54,42 @@ export default {
   data(){
     return {
       project: {},
-      editor:{},
-      editorOptions:{
+      editor: {},
+      cur_editing: '',
+      editorOptions: {
         autoLink: true,
         buttonLabels: 'fontawesome',
+        disableEditing: false,
+        extensions: {
+          spreadsheet: new Spreadsheet(),
+          autolist: new Autolist()
+        },
+        spellcheck: true,
         toolbar: {
           buttons: [
             'bold',
             'italic',
             'underline',
+            'strikethrough',
+            'subscript',
+            'superscript',
             'anchor',
             'h1',
             'h2',
             'h3',
-            'h4',
-            'h5',
-            'h6',
             'quote',
+            'justifyLeft',
+            'justifyCenter',
+            'justifyRight',
+            'justifyFull',
             'outdent',
             'indent',
+            'orderedlist',
+            'unorderedlist',
             'spreadsheet'
-          ]
+          ],
+          static: true,
+          updateOnEmptySelection: true
         }
       }
     }
@@ -74,17 +99,24 @@ export default {
       this.$http
         .get(`/projects/${this.$route.params.project}`)
         .then(res => {
-            // this.$store.commit("setCurrentProject", res.data);
           this.project = res.data
         });
     },
     handleEditorInitialization (editor) {
-        this.editor = editor
-        this.$nextTick(() => {
+      this.editor = editor
+      this.$nextTick(() => {
           // this.highlightSampleText()
-        })
-      },
-    moment
+      })
+    },
+    moment,
+    editableState(id){
+      if (this.cur_editing === id){
+        alert('Saving Now');
+        this.cur_editing = '';
+      }else {
+        this.cur_editing = id
+      }
+    }
   },
   watch: {
     $route: 'getProject'

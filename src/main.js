@@ -9,13 +9,13 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VeeValidate from 'vee-validate';
 import Auth from './plugins/auth';
+import { sync } from 'vuex-router-sync';
+import VuesticPlugin from 'vuestic-theme/vuestic-plugin';
+import YmapPlugin from 'vue-yandex-maps';
 import App from './App';
 import store from './store';
 import router from './router';
-import { sync } from 'vuex-router-sync';
-import VuesticPlugin from 'vuestic-theme/vuestic-plugin';
 import './i18n';
-import YmapPlugin from 'vue-yandex-maps';
 
 Vue.use(VuesticPlugin);
 Vue.use(YmapPlugin);
@@ -91,5 +91,7 @@ new Vue({
   router,
   store,
   template: '<App/>',
-  components: { App }
+  components: {
+    App
+  }
 });
