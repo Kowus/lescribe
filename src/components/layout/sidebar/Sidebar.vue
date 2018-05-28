@@ -39,7 +39,7 @@
           </expanding>
         </li>
         <li>
-          <a href="#" class="sidebar-link"><i class="sidebar-menu-item-icon"></i> Logout</a>
+          <a href="#" class="sidebar-link"><i class="sidebar-menu-item-icon"></i> {{'user.logout' | translate}}</a>
         </li>
       </ul>
     </vuestic-scrollbar>

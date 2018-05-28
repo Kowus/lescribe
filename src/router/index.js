@@ -17,6 +17,16 @@ if (process.env.NODE_ENV === 'development') {
 export default new Router({
   routes: [
     {
+      name: 'Name',
+      path: '/new',
+      component: lazyLoading('dashboard/New'),
+      meta: {
+        title: 'new.title',
+        iconClass: 'vuestic-icon vuestic-icon-plus',
+        auth: true
+      }
+    },
+    {
       name: 'Project',
       path: '/projects/:project',
       component: lazyLoading('dashboard/Overview'),

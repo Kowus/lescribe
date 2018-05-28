@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard">
     <vuestic-widget>
-      <h2 style="padding-top:50px">Create a New Project</h2>
+      <h2 style="padding-top:50px">{{'new.title' | translate}}</h2>
       <hr>
       <div class="row" style="padding:auto 50px; padding-bottom:100px;">
         <form class="offset-md-2 col-md-8" v-model="project">

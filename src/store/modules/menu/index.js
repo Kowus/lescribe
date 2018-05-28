@@ -6,21 +6,10 @@ import ui from './ui';
 import maps from './maps';
 import tables from './tables';
 import auth from './auth';
-import newComponent from './new';
 import extra from './extra';
 
 const state = {
-  items: [
-    dashboard,
-    statistics,
-    forms,
-    tables,
-    ui,
-    extra,
-    auth,
-    maps,
-    newComponent
-  ]
+  items: [dashboard, statistics, forms, tables, ui, extra, auth, maps]
 };
 
 const mutations = {
