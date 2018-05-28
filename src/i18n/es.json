@@ -12,12 +12,12 @@
     "welcome": "Bienvenido!"
   },
   "new": {
-    "title": "New Project",
-    "project_title": "Project Title",
-    "description": "Description",
-    "start_date": "Project Start Date",
-    "public": "Public",
-    "private": "Private"
+    "title": "Nuevo Proyecto",
+    "project_title": "Título del Proyecto",
+    "description": "Descripción",
+    "start_date": "Fecha de inicio",
+    "public": "Público",
+    "private": "Privado"
   },
   "buttons": {
     "advanced": "Iconos, Grupos, Dropdowns",

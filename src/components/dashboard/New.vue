@@ -83,7 +83,7 @@
       createProject(){
         this.$http.post('/projects/new', this.project).then(res => {
         // this.$message(`Successfully created ${res.body.title}`);
-          this.$router.push(`/dashboard`);
+          this.$router.push(`/projects/${res.data.permalink}`);
         });
       }
     }
