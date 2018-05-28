@@ -27,14 +27,24 @@
             </div>
             <h5>Overview</h5>
             <div class="clearfix"></div>
-            <vuestic-medium-editor @initialized="handleEditorInitialization" :editor-options="editorOptions" :contenteditable="cur_editing == 'overview'" v-html="project.overview">
-            </vuestic-medium-editor>
-            <div id='tb-pos'></div>
+            <vuestic-medium-editor @initialized="handleEditorInitialization" :editor-options="editorOptions" :contenteditable="cur_editing == 'overview'" v-html="project.overview"/>
           </div>
-
         </div>
       </div>
     </vuestic-widget>
+
+    <small>
+      Sections<hr>
+    </small>
+
+    <vuestic-widget class="" v-for="section in project.sections" :key="section._id" :section="section">
+      <div>
+        <h3>{{section.link.title}}</h3>
+        <hr class="small">
+      </div>
+    </vuestic-widget>
+
+
   </div>
 </template>
 
