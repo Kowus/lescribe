@@ -23,14 +23,13 @@
           <hr>
           <div>
             <div class="float-right">
-              <a href class="badge" :class="cur_editing === 'overview'? 'badge-info': 'badge-dark'" @click.prevent="editableState('overview')">{{cur_editing === 'overview'? 'Save': 'Edit'}}</a>
+              <a href class="badge" :class="cur_editing === 'overview'? 'badge-info': 'badge-dark'" @click.prevent="updateOverview('overview')">{{cur_editing === 'overview'? 'Save': 'Edit'}}</a>
             </div>
             <h5>Overview</h5>
             <div class="clearfix"></div>
             <vuestic-medium-editor @initialized="handleEditorInitialization" :editor-options="editorOptions" :contenteditable="cur_editing == 'overview'" v-html="project.overview">
             </vuestic-medium-editor>
-
-
+            <div id='tb-pos'></div>
           </div>
 
         </div>
@@ -59,7 +58,7 @@ export default {
       editorOptions: {
         autoLink: true,
         buttonLabels: 'fontawesome',
-        disableEditing: false,
+        disableEditing: true,
         extensions: {
           spreadsheet: new Spreadsheet(),
           autolist: new Autolist()
@@ -77,6 +76,9 @@ export default {
             'h1',
             'h2',
             'h3',
+            'h4',
+            'h5',
+            'h6',
             'quote',
             'justifyLeft',
             'justifyCenter',
@@ -89,6 +91,7 @@ export default {
             'spreadsheet'
           ],
           static: true,
+          sticky: true,
           updateOnEmptySelection: true
         }
       }
@@ -109,10 +112,23 @@ export default {
       })
     },
     moment,
-    editableState(id){
+    updateOverview(id){
       if (this.cur_editing === id){
-        alert('Saving Now');
-        this.cur_editing = '';
+        let origEl = this.editor.origElements.innerHTML;
+        this.$http
+                .patch(`/projects/${this.project._id}/update`, {
+                  target: 'overview',
+                  content: origEl
+                })
+                .then(res => {
+                  // this.$message("Successfully updated overview!");
+                  console.log('Success')
+                })
+                .catch(res => {
+                  // this.$message.error("Error updating overview!");
+                    console.error(res);
+                });
+                  this.cur_editing = '';
       }else {
         this.cur_editing = id
       }
