@@ -37,11 +37,15 @@
       Sections<hr>
     </small>
 
-    <vuestic-widget class="" v-for="section in project.sections" :key="section._id" :section="section">
+    <vuestic-widget v-for="section in project.sections" :key="section._id" :section="section">
       <div>
+        <div class="float-right">
+          <a href class="badge" :class="cur_editing === section._id? 'badge-info': 'badge-dark'" @click.prevent="updateSection(section._id)">{{cur_editing === section._id? 'Save': 'Edit'}}</a>
+        </div>
         <h3>{{section.link.title}}</h3>
         <hr class="small">
       </div>
+      <vuestic-medium-editor @initialized="handleSectionInitialization" :editor-options="editorOptions" :contenteditable="cur_editing == section._id" v-html="section.link.body" :id="section._id"/>
     </vuestic-widget>
 
 
@@ -146,6 +150,12 @@ export default {
       }else {
         this.cur_editing = id
       }
+    },
+    updateSection(id){
+      if (this.cur_editing === id){
+        this.cur_editing = ''
+      } else
+      this.cur_editing = id;
     }
   },
   watch: {
