@@ -10,7 +10,7 @@
       </div>
       <div class="form-group">
         <div class="input-group">
-          <input type="password" id="password" required="required" v-model="user.password"/>
+          <input type="password" id="password" required="required" v-model="user.password" @keyup.13="login()"/>
           <label class="control-label" for="password">{{'auth.password' | translate}}</label><i class="bar"></i>
         </div>
       </div>

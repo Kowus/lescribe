@@ -54,6 +54,7 @@ export default {
     return {
       project: {},
       editor: {},
+      sections:[],
       cur_editing: '',
       editorOptions: {
         autoLink: true,
@@ -110,6 +111,9 @@ export default {
       this.$nextTick(() => {
           // this.highlightSampleText()
       })
+    },
+    handleSectionInitialization(editor){
+      this.sections.push(editor)
     },
     moment,
     updateOverview(id){
