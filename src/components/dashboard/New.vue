@@ -23,19 +23,17 @@
                 </div>
               </div>
           <div class="col">
-          <div class="form-group">
-
-
-            <fieldset>
-                  <vuestic-switch v-model="project.isPublic">
-                    <span
-                      slot="trueTitle">{{'new.public' | translate}}</span>
-                    <span slot="falseTitle">{{'new.private' | translate}}</span>
-                  </vuestic-switch>
-                </fieldset>
-                </div>
-
+            <div class="form-group">
+              <fieldset>
+                <vuestic-switch v-model="project.isPublic">
+                  <span slot="trueTitle">{{'new.public' | translate}}</span>
+                  <span slot="falseTitle">{{'new.private' | translate}}</span>
+                </vuestic-switch>
+              <small v-if="project.isPublic">{{'new.public_desc' | translate}}</small>
+              <small v-else>{{'new.private_desc' | translate}}</small>
+              </fieldset>
             </div>
+          </div>
           </div>
 
           <div class="form-group">
@@ -55,7 +53,7 @@
           </div>
           <div class="form-group">
             <div class="input-group">
-              <button class="btn btn-danger" type="button" @click="createProject()">Create</button>
+              <button class="btn btn-danger" type="button" @click="createProject()">{{'new.create' | translate}}</button>
             </div>
           </div>
         </form>

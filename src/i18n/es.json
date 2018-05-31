@@ -17,7 +17,11 @@
     "description": "Descripción",
     "start_date": "Fecha de inicio",
     "public": "Público",
-    "private": "Privado"
+    "private": "Privado",
+    "private_desc":
+      "El proyecto será visible solo para ti y otros colaboradores",
+    "public_desc": "El proyecto será visible para el público en general",
+    "create": "Crear"
   },
   "buttons": {
     "advanced": "Iconos, Grupos, Dropdowns",

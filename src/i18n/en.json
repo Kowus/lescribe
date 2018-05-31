@@ -21,7 +21,11 @@
     "description": "Description",
     "start_date": "Project Start Date",
     "public": "Public",
-    "private": "Private"
+    "private": "Private",
+    "private_desc":
+      "Project will be visible to only you and other contributors",
+    "public_desc": "Project is visible to the general public",
+    "create": "Create"
   },
   "buttons": {
     "advanced": "Icons, Groups, Dropdowns",
