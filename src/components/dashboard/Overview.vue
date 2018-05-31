@@ -4,8 +4,8 @@
       <div class="typo-headers">
         <div style="padding: 20px">
           <div class="float-right">
-            <span class="badge badge-info" v-if="project.isPublic">Public</span>
-            <span class="badge badge-danger" v-else>Private</span>
+            <span class="badge badge-info" v-if="project.isPublic">{{'new.public' | translate}}</span>
+            <span class="badge badge-danger" v-else>{{'new.private' | translate}}</span>
             <span class="badge badge-dark">{{moment(project.stats.startDate).format('MMM Do, YYYY')}}</span>
             <span class="badge badge-success" v-if="project.completed.status">Completed</span>
             <span class="badge badge-warning" v-else>Incomplete</span>
@@ -13,6 +13,8 @@
           <h3>{{project.title}}</h3>
           <div style="margin-left:3px; opacity:0.9;">
             <small class="text-info" style="margin-right:5px;padding:2px 5px;" :key="tag" v-for="tag in project.tags" :tag="tag">{{tag}}</small>
+            <small class="btn btn-micro">New tag</small>
+
           </div>
           <hr style="clear: both">
           <div>
@@ -33,19 +35,24 @@
       </div>
     </vuestic-widget>
 
-    <small>
-      Sections<hr>
-    </small>
-
+    <div class="float-right">
+      <a class="badge badge-info" style="font-size: 14px;" @click.prevent="createNewSection">
+          New Section
+      </a>
+    </div>
+    <h6>
+      Sections
+    </h6>
+      <hr style="clear: both">
     <vuestic-widget v-for="section in project.sections" :key="section._id" :section="section">
       <div>
         <div class="float-right">
-          <a href class="badge" :class="cur_editing === section._id? 'badge-info': 'badge-dark'" @click.prevent="updateSection(section._id)">{{cur_editing === section._id? 'Save': 'Edit'}}</a>
+          <a href class="badge" :class="cur_editing === section.link._id? 'badge-info': 'badge-dark'" @click.prevent="updateSection(section.link._id)">{{cur_editing === section.link._id? 'Save': 'Edit'}}</a>
         </div>
         <h3>{{section.link.title}}</h3>
         <hr class="small">
       </div>
-      <vuestic-medium-editor @initialized="handleSectionInitialization" :editor-options="editorOptions" :contenteditable="cur_editing == section._id" v-html="section.link.body" :id="section._id"/>
+      <vuestic-medium-editor @initialized="handleSectionInitialization" :editor-options="editorOptions" :contenteditable="cur_editing == section.link._id" v-html="section.link.body" :id="section.link._id"/>
     </vuestic-widget>
 
 
@@ -113,6 +120,16 @@ export default {
     }
   },
   methods: {
+    createNewSection(){
+      this.project.sections.push({
+        _id: 'yo',
+        link:{
+          title: '',
+          _id: 'bolobo',
+          body:'<p>Okay okay okay okay okay</p>'
+        }
+      })
+    },
     getProject(){
       this.$http
         .get(`/projects/${this.$route.params.project}`)
@@ -153,6 +170,14 @@ export default {
     },
     updateSection(id){
       if (this.cur_editing === id){
+        let origEl = document.getElementById(id)
+        let section_body = origEl.innerHTML
+        // console.log(section_body)
+        this.$http.patch(`/sections/${id}/update`, {
+          project: this.project._id,
+          content: section_body,
+          target: 'body'
+        });
         this.cur_editing = ''
       } else
       this.cur_editing = id;
