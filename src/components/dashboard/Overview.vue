@@ -39,6 +39,7 @@
       <a class="badge badge-info" style="font-size: 14px;" @click.prevent="createNewSection">
           New Section
       </a>
+
     </div>
     <h6>
       Sections
@@ -47,9 +48,10 @@
     <vuestic-widget v-for="section in project.sections" :key="section._id" :section="section">
       <div>
         <div class="float-right">
-          <a href class="badge" :class="cur_editing === section.link._id? 'badge-info': 'badge-dark'" @click.prevent="updateSection(section.link._id)">{{cur_editing === section.link._id? 'Save': 'Edit'}}</a>
+          <a href class="badge badge-info" @click.prevent="updateSection(section.link._id)" v-if="cur_editing === section.link._id"> Save</a>
+          <a href class="badge badge-dark" @click.prevent="updateSection(section.link._id)" v-else>Edit <i class="fa fa-pencil-square-o"></i></a>
         </div>
-        <h3>{{section.link.title}}</h3>
+        <h3>{{section.link.title}} <i class="fa fa-pencil-square-o"></i></h3>
         <hr class="small">
       </div>
       <vuestic-medium-editor @initialized="handleSectionInitialization" :editor-options="editorOptions" :contenteditable="cur_editing == section.link._id" v-html="section.link.body" :id="section.link._id"/>
@@ -78,6 +80,7 @@ export default {
       editor: {},
       sections:[],
       cur_editing: '',
+      edit_title: '',
       editorOptions: {
         autoLink: true,
         buttonLabels: 'fontawesome',
@@ -129,13 +132,10 @@ export default {
       this.$http
           .post(`/projects/${this.project._id}/create-section`, section)
           .then(res => {
-            // section.link._id = res.data._id;
-            // section.new_title = false;
             const newSection = res.data;
             this.project.sections.unshift({link: newSection});
             console.log(newSection)
           });
-
     },
     getProject(){
       this.$http
