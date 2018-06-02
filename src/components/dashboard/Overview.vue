@@ -13,7 +13,7 @@
           <h3>{{project.title}}</h3>
           <div style="margin-left:3px; opacity:0.9;">
             <small class="text-info" style="margin-right:5px;padding:2px 5px;" :key="tag" v-for="tag in project.tags" :tag="tag">{{tag}}</small>
-            <small class="btn btn-micro">New tag</small>
+            <!-- <small class="btn btn-micro">New tag</small> -->
 
           </div>
           <hr style="clear: both">
@@ -64,6 +64,7 @@
 import Autolist from 'medium-editor-autolist'
 import Spreadsheet from 'medium-editor-handsontable'
 import moment from 'moment'
+let {randomBytes} = require('crypto')
 
 
 export default {
@@ -121,14 +122,20 @@ export default {
   },
   methods: {
     createNewSection(){
-      this.project.sections.push({
-        _id: 'yo',
-        link:{
-          title: '',
-          _id: 'bolobo',
-          body:'<p>Okay okay okay okay okay</p>'
-        }
-      })
+      let section = {
+          title: `New Section ${moment().format('MMMM Do, YYYY')}`,
+          body: 'Start typing now'
+        };
+      this.$http
+          .post(`/projects/${this.project._id}/create-section`, section)
+          .then(res => {
+            // section.link._id = res.data._id;
+            // section.new_title = false;
+            const newSection = res.data;
+            this.project.sections.unshift({link: newSection});
+            console.log(newSection)
+          });
+
     },
     getProject(){
       this.$http
@@ -164,6 +171,7 @@ export default {
                     console.error(res);
                 });
                   this.cur_editing = '';
+
       }else {
         this.cur_editing = id
       }
