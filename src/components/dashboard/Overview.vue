@@ -51,7 +51,11 @@
           <a href class="badge badge-info" @click.prevent="updateSection(section.link._id)" v-if="cur_editing === section.link._id"> Save</a>
           <a href class="badge badge-dark" @click.prevent="updateSection(section.link._id)" v-else>Edit <i class="fa fa-pencil-square-o"></i></a>
         </div>
-        <h3>{{section.link.title}} <i class="fa fa-pencil-square-o"></i></h3>
+        <!-- <h3>{{section.link.title}} | <i class="fa fa-pencil-square-o"></i></h3> -->
+        <div class="form-group">
+          <input class="form-control" v-model="section.link.title" @blur="handleTitleChange(section)" @keyup.13="handleTitleChange(section)" style="font-size:2em; height: 100%; font-weight: 600">
+        </div>
+
         <hr class="small">
       </div>
       <vuestic-medium-editor @initialized="handleSectionInitialization" :editor-options="editorOptions" :contenteditable="cur_editing == section.link._id" v-html="section.link.body" :id="section.link._id"/>
@@ -143,6 +147,18 @@ export default {
         .then(res => {
           this.project = res.data
         });
+    },
+    handleTitleChange(section){
+      // alert(section.link.title)
+      this.$http
+        .patch(`/sections/${section.link._id}/update`, {
+          project: this.project._id,
+          content: section.link.title,
+          target: 'title'
+        }).
+        then(res=>{
+          console.log('Success!!!')
+        }).catch(res=>{})
     },
     handleEditorInitialization (editor) {
       this.editor = editor
