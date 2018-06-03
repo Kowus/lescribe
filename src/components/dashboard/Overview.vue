@@ -55,7 +55,7 @@
         <div class="form-group">
           <input class="form-control" v-model="section.link.title" @blur="handleTitleChange(section)" @keyup.13="handleTitleChange(section)" style="font-size:2em; height: 100%; font-weight: 600">
         </div>
-        <small class="text-info" style="margin-right:5px;padding:2px 5px;" :key="tag" v-for="tag in section.link.tags" :tag="tag">{{tag}} <sup><i class="fa fa-times remove-tag"></i></sup></small>
+        <small class="text-info" style="margin-right:5px;padding:2px 5px;" :key="tag" v-for="tag in section.link.tags" :tag="tag">{{tag}} <sup><i class="fa fa-times remove-tag" @click="removeSectionTag(section, tag)"></i></sup></small>
         <small class="badge">
           <input class="form-control" style="height: 25px; width: 100px; max-width: 150px;" placeholder="new-tag" @keyup.13="newTag(section.link._id, section)" :id="`${section.link._id}-tag`">
         </small>
@@ -229,6 +229,7 @@ export default {
       tagContent = tagContent.toLowerCase().split(' ').join('-')
       if(id === 'overview') {
         route = `/projects/${this.project._id}/update`;
+        if(this.project.link.tags.includes(tagContent)) return;
         this.project.tags.push(tagContent);
         payload = {
           target: 'tags',
@@ -236,6 +237,7 @@ export default {
         }
       }else{
         route = `/sections/${section.link._id}/update`;
+        if(section.link.tags.includes(tagContent)) return;
         section.link.tags.push(tagContent);
         payload = {
           target: 'tags',
@@ -253,6 +255,20 @@ export default {
     },
     updateProject(arg){
       return this.$http.patch(arg.route, arg.payload)
+    },
+    removeSectionTag(section, tag){
+      section.link.tags.splice(section.link.tags.indexOf(tag), 1);
+      let route = `/sections/${section.link._id}/update`;
+      let payload = {
+        target: 'tags',
+        content: section.link.tags,
+        project: this.project._id
+      }
+      this.updateProject({route, payload}).then((result) => {
+        // nothing
+      }).catch((err) => {
+        // nothing
+      });
     }
   },
   watch: {
