@@ -1,6 +1,7 @@
 {
   "complete": "complete",
   "incomplete": "incomplete",
+  "newTag": "new-tag",
   "auth": {
     "agree": "I agree to",
     "alreadyJoined": "Already joined?",

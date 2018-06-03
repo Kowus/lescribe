@@ -17,6 +17,39 @@ if (process.env.NODE_ENV === 'development') {
 export default new Router({
   routes: [
     {
+      name: 'auth',
+      meta: {
+        title: 'menu.auth',
+        iconClass: 'vuestic-icon vuestic-icon-auth'
+      },
+      path: '/auth',
+      redirect: '/auth/login',
+      children: [
+        {
+          name: 'Login',
+          path: '/auth/login',
+          component: lazyLoading('auth/login/Login'),
+          meta: {
+            default: true,
+            title: 'menu.login',
+            newWindow: true,
+            guest: true
+          }
+        },
+        {
+          name: 'Signup',
+          path: '/auth/signup',
+          component: lazyLoading('auth/signup/Signup'),
+          meta: {
+            default: false,
+            title: 'menu.signUp',
+            newWindow: true,
+            guest: true
+          }
+        }
+      ]
+    },
+    {
       name: 'Name',
       path: '/new',
       component: lazyLoading('dashboard/New'),

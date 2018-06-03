@@ -5,11 +5,11 @@ import dashboard from './dashboard';
 import ui from './ui';
 import maps from './maps';
 import tables from './tables';
-import auth from './auth';
+// import auth from './auth';
 import extra from './extra';
 
 const state = {
-  items: [dashboard, statistics, forms, tables, ui, extra, auth, maps]
+  items: [dashboard, statistics, forms, tables, ui, extra, maps]
 };
 
 const mutations = {

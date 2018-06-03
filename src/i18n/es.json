@@ -1,6 +1,7 @@
 {
   "complete": "completo",
   "incomplete": "incompleto",
+  "newTag": "nueva-etiqueta",
   "auth": {
     "agree": "Acepto",
     "alreadyJoined": "Ya tienes una cuenta?",
