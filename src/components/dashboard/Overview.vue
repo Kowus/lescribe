@@ -13,8 +13,9 @@
           <h3>{{project.title}}</h3>
           <div style="margin-left:3px; opacity:0.9;">
             <small class="text-info" style="margin-right:5px;padding:2px 5px;" :key="tag" v-for="tag in project.tags" :tag="tag">{{tag}}</small>
-            <!-- <small class="btn btn-micro">New tag</small> -->
-
+            <small class="badge">
+              <input class="form-control" style="height: 25px; width: 100px; max-width: 150px;" placeholder="new-tag" @keyup.13="newTag('overview')" id="overview-tag">
+            </small>
           </div>
           <hr style="clear: both">
           <div>
@@ -51,10 +52,13 @@
           <a href class="badge badge-info" @click.prevent="updateSection(section.link._id)" v-if="cur_editing === section.link._id"> Save</a>
           <a href class="badge badge-dark" @click.prevent="updateSection(section.link._id)" v-else>Edit <i class="fa fa-pencil-square-o"></i></a>
         </div>
-        <!-- <h3>{{section.link.title}} | <i class="fa fa-pencil-square-o"></i></h3> -->
         <div class="form-group">
           <input class="form-control" v-model="section.link.title" @blur="handleTitleChange(section)" @keyup.13="handleTitleChange(section)" style="font-size:2em; height: 100%; font-weight: 600">
         </div>
+        <small class="text-info" style="margin-right:5px;padding:2px 5px;" :key="tag" v-for="tag in section.link.tags" :tag="tag">{{tag}}</small>
+        <small class="badge">
+          <input class="form-control" style="height: 25px; width: 100px; max-width: 150px;" placeholder="new-tag" @keyup.13="newTag(section.link._id, section)" :id="`${section.link._id}-tag`">
+        </small>
 
         <hr class="small">
       </div>
@@ -150,15 +154,17 @@ export default {
     },
     handleTitleChange(section){
       // alert(section.link.title)
-      this.$http
-        .patch(`/sections/${section.link._id}/update`, {
+      let route = `/sections/${section.link._id}/update`;
+      let payload = {
           project: this.project._id,
           content: section.link.title,
           target: 'title'
-        }).
-        then(res=>{
+        }
+      this.updateProject({route,payload})
+        .then(res=>{
           console.log('Success!!!')
-        }).catch(res=>{})
+        })
+        .catch(res=>{})
     },
     handleEditorInitialization (editor) {
       this.editor = editor
@@ -173,11 +179,12 @@ export default {
     updateOverview(id){
       if (this.cur_editing === id){
         let origEl = this.editor.origElements.innerHTML;
-        this.$http
-                .patch(`/projects/${this.project._id}/update`, {
-                  target: 'overview',
-                  content: origEl
-                })
+        let route = `/projects/${this.project._id}/update`;
+        let payload = {
+          target: 'overview',
+          content: origEl
+        }
+        this.updateProject({route, payload})
                 .then(res => {
                   // this.$message("Successfully updated overview!");
                   console.log('Success')
@@ -197,14 +204,55 @@ export default {
         let origEl = document.getElementById(id)
         let section_body = origEl.innerHTML
         // console.log(section_body)
-        this.$http.patch(`/sections/${id}/update`, {
+        let route = `/sections/${id}/update`
+        let payload = {
           project: this.project._id,
           content: section_body,
           target: 'body'
+        }
+        this.updateProject({route, payload}).then((result) => {
+          this.cur_editing = ''
+        }).catch((err) => {
+          // handle errors
         });
-        this.cur_editing = ''
       } else
       this.cur_editing = id;
+    },
+    newTag(id, section){
+      let tagInput = document.getElementById(id+'-tag').value;
+      let tagContent = tagInput.toString();
+      let route;
+      let payload;
+      if(tagContent === '' || tagContent===' '){
+        return;
+      }
+      tagContent = tagContent.toLowerCase().split(' ').join('-')
+      if(id === 'overview') {
+        route = `/projects/${this.project._id}/update`;
+        this.project.tags.push(tagContent);
+        payload = {
+          target: 'tags',
+          content: this.project.tags
+        }
+      }else{
+        route = `/sections/${section.link._id}/update`;
+        section.link.tags.push(tagContent);
+        payload = {
+          target: 'tags',
+          content: section.link.tags,
+          project: this.project._id
+        }
+      }
+      this.updateProject({route,payload})
+        .then(res=>{
+          document.getElementById(id+'-tag').value = '';
+        })
+        .catch(res=>{
+          // handle errors
+        })
+    },
+    updateProject(arg){
+      return this.$http.patch(arg.route, arg.payload)
     }
   },
   watch: {
