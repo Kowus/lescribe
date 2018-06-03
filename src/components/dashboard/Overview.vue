@@ -55,7 +55,7 @@
         <div class="form-group">
           <input class="form-control" v-model="section.link.title" @blur="handleTitleChange(section)" @keyup.13="handleTitleChange(section)" style="font-size:2em; height: 100%; font-weight: 600">
         </div>
-        <small class="text-info" style="margin-right:5px;padding:2px 5px;" :key="tag" v-for="tag in section.link.tags" :tag="tag">{{tag}}</small>
+        <small class="text-info" style="margin-right:5px;padding:2px 5px;" :key="tag" v-for="tag in section.link.tags" :tag="tag">{{tag}} <sup><i class="fa fa-times remove-tag"></i></sup></small>
         <small class="badge">
           <input class="form-control" style="height: 25px; width: 100px; max-width: 150px;" placeholder="new-tag" @keyup.13="newTag(section.link._id, section)" :id="`${section.link._id}-tag`">
         </small>
@@ -261,3 +261,14 @@ export default {
 
 }
 </script>
+
+<style lang="scss">
+.remove-tag {
+  color: #ccc;
+  font-size: 1.3em;
+  cursor: pointer;
+  &:hover {
+    color: #e34a4a
+  }
+}
+</style>
