@@ -8,11 +8,11 @@
       <div class="typo-headers">
         <div style="padding: 20px">
           <div class="float-right">
-            <span class="badge badge-info" v-if="project.isPublic">Public</span>
-            <span class="badge badge-danger" v-else>Private</span>
+            <span class="badge badge-info" v-if="project.isPublic">{{'new.public' | translate}}</span>
+            <span class="badge badge-danger" v-else>{{'new.private' | translate}}</span>
             <span class="badge badge-dark">{{moment(project.stats.startDate).format('MMM Do, YYYY')}}</span>
-            <span class="badge badge-success" v-if="project.completed.status">Completed</span>
-            <span class="badge badge-warning" v-else>Incomplete</span>
+            <span class="badge badge-success" v-if="project.completed.status">{{'complete' | translate}}</span>
+            <span class="badge badge-warning" v-else>{{'incomplete' | translate}}</span>
           </div>
           <h3><router-link :to="'/projects/'+project.permalink">{{project.title}}</router-link></h3>
           <div style="margin-left:3px; opacity:0.9;">

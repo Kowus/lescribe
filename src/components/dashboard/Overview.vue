@@ -7,8 +7,8 @@
             <span class="badge badge-info" v-if="project.isPublic">{{'new.public' | translate}}</span>
             <span class="badge badge-danger" v-else>{{'new.private' | translate}}</span>
             <span class="badge badge-dark">{{moment(project.stats.startDate).format('MMM Do, YYYY')}}</span>
-            <span class="badge badge-success" v-if="project.completed.status">Completed</span>
-            <span class="badge badge-warning" v-else>Incomplete</span>
+            <span class="badge badge-success" v-if="project.completed.status">{{'complete' | translate}}</span>
+            <span class="badge badge-warning" v-else>{{'incomplete' | translate}}</span>
           </div>
           <h3>{{project.title}}</h3>
           <div style="margin-left:3px; opacity:0.9;">
@@ -33,7 +33,7 @@
             </div>
             <h5>Overview</h5>
             <div class="clearfix"></div>
-            <vuestic-medium-editor @initialized="handleEditorInitialization" :editor-options="editorOptions" :contenteditable="cur_editing == 'overview'" v-html="project.overview"/>
+            <vuestic-medium-editor @initialized="handleEditorInitialization" :editor-options="editorOptions" :contenteditable="cur_editing == 'overview'" v-html="project.overview" id="overview-content"/>
           </div>
         </div>
       </div>
@@ -64,6 +64,7 @@
         </small>
 
         <hr class="small">
+        <p id='apuskelenke'></p>
       </div>
       <vuestic-medium-editor @initialized="handleSectionInitialization" :editor-options="editorOptions" :contenteditable="cur_editing == section.link._id" v-html="section.link.body" :id="section.link._id"/>
     </vuestic-widget>
@@ -78,6 +79,10 @@ import Autolist from 'medium-editor-autolist'
 import Spreadsheet from 'medium-editor-handsontable'
 import moment from 'moment'
 let {randomBytes} = require('crypto')
+let spreadsheetOptions = {
+            manualColumnResize: true,
+            manualRowResize: true,
+          }
 
 
 export default {
@@ -97,7 +102,8 @@ export default {
         buttonLabels: 'fontawesome',
         disableEditing: true,
         extensions: {
-          spreadsheet: new Spreadsheet(),
+          spreadsheet: new Spreadsheet(spreadsheetOptions),
+          // spreadsheet: new MediumEditorSpreadsheet(spreadsheetOptions),
           autolist: new Autolist()
         },
         spellcheck: true,
@@ -196,10 +202,12 @@ export default {
                   // this.$message.error("Error updating overview!");
                     console.error(res);
                 });
-                  this.cur_editing = '';
-
+                this.cur_editing = '';
       }else {
         this.cur_editing = id
+        this.$nextTick(() => {
+          document.getElementById('overview-content').focus();
+        })
       }
     },
     updateSection(id){
@@ -218,8 +226,12 @@ export default {
         }).catch((err) => {
           // handle errors
         });
-      } else
-      this.cur_editing = id;
+      } else{
+        this.cur_editing = id;
+        this.$nextTick(() => {
+          document.getElementById(id).focus();
+        })
+      }
     },
     newTag(id, section){
       let tagInput = document.getElementById(id+'-tag').value;

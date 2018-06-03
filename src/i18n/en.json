@@ -1,4 +1,6 @@
 {
+  "complete": "complete",
+  "incomplete": "incomplete",
   "auth": {
     "agree": "I agree to",
     "alreadyJoined": "Already joined?",

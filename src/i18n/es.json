@@ -1,4 +1,6 @@
 {
+  "complete": "completo",
+  "incomplete": "incompleto",
   "auth": {
     "agree": "Acepto",
     "alreadyJoined": "Ya tienes una cuenta?",
