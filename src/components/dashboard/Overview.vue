@@ -12,7 +12,10 @@
           </div>
           <h3>{{project.title}}</h3>
           <div style="margin-left:3px; opacity:0.9;">
-            <small class="text-info" style="margin-right:5px;padding:2px 5px;" :key="tag" v-for="tag in project.tags" :tag="tag">{{tag}}</small>
+            <small class="text-info" style="margin-right:5px;padding:2px 5px;" :key="tag" v-for="tag in project.tags" :tag="tag">
+              {{tag}}
+               <sup><i class="fa fa-times remove-tag" @click="removeProjectTag(tag)"></i></sup>
+            </small>
             <small class="badge">
               <input class="form-control" style="height: 25px; width: 100px; max-width: 150px;" placeholder="new-tag" @keyup.13="newTag('overview')" id="overview-tag">
             </small>
@@ -229,7 +232,7 @@ export default {
       tagContent = tagContent.toLowerCase().split(' ').join('-')
       if(id === 'overview') {
         route = `/projects/${this.project._id}/update`;
-        if(this.project.link.tags.includes(tagContent)) return;
+        if(this.project.tags.includes(tagContent)) return;
         this.project.tags.push(tagContent);
         payload = {
           target: 'tags',
@@ -263,6 +266,19 @@ export default {
         target: 'tags',
         content: section.link.tags,
         project: this.project._id
+      }
+      this.updateProject({route, payload}).then((result) => {
+        // nothing
+      }).catch((err) => {
+        // nothing
+      });
+    },
+    removeProjectTag(tag){
+      this.project.tags.splice(this.project.tags.indexOf(tag), 1);
+      let route = `/projects/${this.project._id}/update`;
+      let payload = {
+        target: 'tags',
+        content: this.project.tags
       }
       this.updateProject({route, payload}).then((result) => {
         // nothing
