@@ -1,7 +1,8 @@
 <template>
   <div id="app" class="app">
     <layout v-if="!isAuth"/>
-    <auth-layout v-else></auth-layout>
+    <!-- <auth-layout v-else></auth-layout> -->
+    <router-view v-else/>>
   </div>
 </template>
 

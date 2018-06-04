@@ -22,12 +22,13 @@ export default new Router({
         title: 'menu.auth',
         iconClass: 'vuestic-icon vuestic-icon-auth'
       },
+      component: lazyLoading('layout/AuthLayout'),
       path: '/auth',
       redirect: '/auth/login',
       children: [
         {
           name: 'Login',
-          path: '/auth/login',
+          path: 'login',
           component: lazyLoading('auth/login/Login'),
           meta: {
             default: true,
