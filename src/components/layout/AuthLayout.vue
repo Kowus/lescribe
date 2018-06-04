@@ -5,10 +5,11 @@
       <div class="auth-content col-lg-6 col-12">
         <router-view></router-view>
       </div>
-      <div class="auth-wallpaper col-6 d-none d-lg-flex">
+      <div class="auth-wallpaper col-6 d-none d-lg-flex text-center" style="background-color: black">
         <div class="oblique"></div>
         <!-- <router-link class="i-vuestic" :to="{path: '/'}"></router-link> -->
-        <router-link :to="{path: '/'}" class="i-vuestic">
+        <router-link :to="{path: '/'}" class="i-vuestic" style="background: none; font-family: Tahoma, Sans; font-size: 4em; font-weight: 900; color: white;">
+        L E S C R I B E
         </router-link>
       </div>
     </div>
@@ -63,7 +64,8 @@
         }
         .oblique {
           position: absolute;
-          background-color: $auth-wallpaper-oblique-line;
+          background-color: $darkest-gray;
+          // background-color: $auth-wallpaper-oblique-line;
           left: calc(50% - 27%/2);
           transform: rotate(15deg);
           width: 27%;

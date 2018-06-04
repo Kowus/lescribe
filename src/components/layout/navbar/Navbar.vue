@@ -14,7 +14,7 @@
       </div>
 
       <div class="navbar-text offset-md-1 col-md-7 d-none d-lg-flex align-items-center justify-content-center">
-        {{'navbar.messageUs' | translate}}&nbsp;<a href="mailto:hello@epicmax.co">hello@epicmax.co</a>
+        {{'navbar.messageUs' | translate}}&nbsp;<a href="mailto:barnabas@elite-education.org">barnabas@elite-education.org</a>
       </div>
 
       <div class="col nav-item dropdown navbar-dropdown d-flex align-items-center justify-content-center" v-dropdown>
