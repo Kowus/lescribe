@@ -17,7 +17,7 @@
                <sup><i class="fa fa-times remove-tag" @click="removeProjectTag(tag)"></i></sup>
             </small>
             <small class="badge">
-              <input class="form-control" style="height: 25px; width: 100px; max-width: 150px;" placeholder="new-tag" @keyup.13="newTag('overview')" id="overview-tag">
+              <input class="form-control" style="height: 25px; min-width: 100px; max-width: 130px;" :placeholder="$t('newTag')" @keyup.13="newTag('overview')" id="overview-tag">
             </small>
           </div>
           <hr style="clear: both">
@@ -60,7 +60,7 @@
         </div>
         <small class="text-info" style="margin-right:5px;padding:2px 5px;" :key="tag" v-for="tag in section.link.tags" :tag="tag">{{tag}} <sup><i class="fa fa-times remove-tag" @click="removeSectionTag(section, tag)"></i></sup></small>
         <small class="badge">
-          <input class="form-control" style="height: 25px; width: 100px; max-width: 150px;" placeholder="new-tag" @keyup.13="newTag(section.link._id, section)" :id="`${section.link._id}-tag`">
+          <input class="form-control" style="height: 25px; width: 100px; max-width: 150px;" :placeholder="$t('newTag')" @keyup.13="newTag(section.link._id, section)" :id="`${section.link._id}-tag`">
         </small>
 
         <hr class="small">
