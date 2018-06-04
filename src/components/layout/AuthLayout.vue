@@ -1,6 +1,6 @@
 <template>
   <div class="auth-layout">
-    <div class="nav d-lg-none text-center"><router-link class="i-vuestic" :to="{path: '/'}" style="background: none; font-family: Tahoma, Sans; font-size: 4em; font-weight: 900; color: white;">
+    <div class="nav d-lg-none text-center"><router-link class="i-vuestic" :to="{path: '/'}" style="background: none; font-family: Tahoma, Sans; font-size: 3em; font-weight: 900; color: white;">
     L E S C R I B E
     </router-link></div>
     <div class="main row">
