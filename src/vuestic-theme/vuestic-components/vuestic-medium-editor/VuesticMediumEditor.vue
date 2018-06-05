@@ -62,8 +62,7 @@
 
 <style lang="scss">
   .vuestic-medium-editor {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding: 5px 20px;
     &:focus {
       outline: 1px solid rgba(0,0,0,.1);
     }
