@@ -4,17 +4,23 @@
     <form name="signup" v-model="user">
       <div class="form-group">
         <div class="input-group">
-          <input type="text" id="givenname" required="required" v-model="user.givenname"/>
-          <label class="control-label" for="givenname">{{'user.firstname' | translate}}</label><i class="bar"></i>
+          <input type="text" id="given_name" required="required" v-model="user.given_name"/>
+          <label class="control-label" for="given_name">{{'user.firstname' | translate}}</label><i class="bar"></i>
         </div>
         <div class="input-group">
-          <input type="text" id="familyname" required="required" v-model="user.familyname"/>
-          <label class="control-label" for="familyname">{{'user.lastname' | translate}}</label><i class="bar"></i>
+          <input type="text" id="family_name" required="required" v-model="user.family_name"/>
+          <label class="control-label" for="family_name">{{'user.lastname' | translate}}</label><i class="bar"></i>
         </div>
       </div>
       <div class="form-group">
         <div class="input-group">
-          <input type="text" id="email" required="required" v-model="user.username"/>
+          <input type="text" id="username" required="required" v-model="user.username"/>
+          <label class="control-label" for="username">{{'user.username' | translate}}</label><i class="bar"></i>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <input type="email" id="email" required="required" v-model="user.email"/>
           <label class="control-label" for="email">{{'auth.email' | translate}}</label><i class="bar"></i>
         </div>
       </div>
@@ -32,7 +38,7 @@
         </template>
       </vuestic-checkbox>
       <div class="d-flex flex-column flex-lg-row align-items-center justify-content-between down-container">
-        <button class="btn btn-primary" type="submit">
+        <button class="btn btn-primary" type="submit" @click="registerUser()" :disabled="!checkboxOneModel">
           {{'auth.signUp' | translate}}
         </button>
         <router-link class='link' :to="{name: 'Login'}">{{'auth.alreadyJoined' | translate}}</router-link>
@@ -42,6 +48,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 /* eslint-disable */
   export default {
     name: 'signup',
@@ -49,11 +56,28 @@
       return {
         checkboxOneModel: true,
         user:{
-          givenname:'',
-          familyname:'',
+          email: '',
+          given_name:'',
+          family_name:'',
           username: '',
           password: ''
         }
+      }
+    },
+    methods: {
+      registerUser(){
+        // console.log(this.$t('auth.email'))
+        this.$http.post('/signup', this.user)
+              .then(res => {
+                this.$auth.setToken(res.data.token, moment().add(6, "h"));
+                if(this.$route.query.redirect){
+                  this.$router.push(this.$route.query.redirect)
+                }
+                else
+                  this.$router.push('/dashboard');
+              }).catch(error => {
+                console.error(error);
+            });
       }
     }
   }

@@ -237,6 +237,7 @@
     "profile": "Mi Perfil",
     "logout": "Cerrar Sesión",
     "firstname": "Nombre de Pila",
-    "lastname": "Apellido"
+    "lastname": "Apellido",
+    "username": "Usuario"
   }
 }

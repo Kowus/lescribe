@@ -18,6 +18,8 @@
   "breadcrumbs": {
     "home": "Home"
   },
+  "login_failed": "",
+  "register_failed": "",
   "new": {
     "title": "Create A New Project",
     "project_title": "Project Title",
@@ -258,7 +260,8 @@
     "logout": "Logout",
     "profile": "My Profile",
     "firstname": "First Name",
-    "lastname": "Last Name"
+    "lastname": "Last Name",
+    "username": "Username"
   },
   "treeView": {
     "basic": "Basic",
