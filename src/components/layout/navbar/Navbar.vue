@@ -1,8 +1,8 @@
 <template>
   <nav class="navbar app-navbar navbar-toggleable-md">
     <div class="navbar-brand-container d-flex align-items-center justify-content-start">
-      <router-link class="navbar-brand" to="/dashboard">
-        <i class="i-vuestic"></i>
+      <router-link class="navbar-brand i-vuestic" to="/dashboard" style="font-size: 1.2em">
+        L E S C R I B E
       </router-link>
     </div>
 
