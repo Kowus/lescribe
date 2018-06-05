@@ -13,10 +13,15 @@
 }
 
 .i-vuestic {
-  display: inline-block;
+  /*  display: inline-block;
   width: 129px;
   height: 15.4px;
-  background: url('assets/icons/vuestic.svg') no-repeat center center;
+  background: url('assets/icons/vuestic.svg') no-repeat center center; */
+  background: none;
+  font-family: Tahoma, Sans;
+  font-size: 3em;
+  font-weight: 900;
+  color: white;
 }
 
 .i-menu-expanded {
