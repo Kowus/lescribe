@@ -235,6 +235,8 @@
   "user": {
     "language": "Cambiar Idioma",
     "profile": "Mi Perfil",
-    "logout": "Cerrar Sesión"
+    "logout": "Cerrar Sesión",
+    "firstname": "Nombre de Pila",
+    "lastname": "Apellido"
   }
 }

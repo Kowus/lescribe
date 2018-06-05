@@ -4,6 +4,16 @@
     <form name="signup" v-model="user">
       <div class="form-group">
         <div class="input-group">
+          <input type="text" id="givenname" required="required" v-model="user.givenname"/>
+          <label class="control-label" for="givenname">{{'user.firstname' | translate}}</label><i class="bar"></i>
+        </div>
+        <div class="input-group">
+          <input type="text" id="familyname" required="required" v-model="user.familyname"/>
+          <label class="control-label" for="familyname">{{'user.lastname' | translate}}</label><i class="bar"></i>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
           <input type="text" id="email" required="required" v-model="user.username"/>
           <label class="control-label" for="email">{{'auth.email' | translate}}</label><i class="bar"></i>
         </div>
@@ -39,6 +49,8 @@
       return {
         checkboxOneModel: true,
         user:{
+          givenname:'',
+          familyname:'',
           username: '',
           password: ''
         }

@@ -256,7 +256,9 @@
   "user": {
     "language": "Change Language",
     "logout": "Logout",
-    "profile": "My Profile"
+    "profile": "My Profile",
+    "firstname": "First Name",
+    "lastname": "Last Name"
   },
   "treeView": {
     "basic": "Basic",
