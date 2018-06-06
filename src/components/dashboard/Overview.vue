@@ -33,7 +33,7 @@
             </div>
             <h5>Overview</h5>
             <div class="clearfix"></div>
-            <vuestic-medium-editor @initialized="handleEditorInitialization" :editor-options="editorOptions" :contenteditable="cur_editing == 'overview'" v-html="project.overview" id="overview-content"/>
+            <vuestic-medium-editor @initialized="handleEditorInitialization" :editor-options="editorOptions()" :contenteditable="cur_editing == 'overview'" v-html="project.overview" id="overview-content"/>
           </div>
         </div>
       </div>
@@ -66,7 +66,7 @@
         <hr class="small">
         <p id='apuskelenke'></p>
       </div>
-      <vuestic-medium-editor @initialized="handleSectionInitialization" :editor-options="editorOptions" :contenteditable="cur_editing == section.link._id" v-html="section.link.body" :id="section.link._id"/>
+      <vuestic-medium-editor @initialized="handleSectionInitialization" :editor-options="editorOptions()" :contenteditable="cur_editing == section.link._id" v-html="section.link.body" :id="section.link._id"/>
     </vuestic-widget>
 
 
@@ -96,8 +96,12 @@ export default {
       editor: {},
       sections:[],
       cur_editing: '',
-      edit_title: '',
-      editorOptions: {
+      edit_title: ''
+    }
+  },
+  methods: {
+    editorOptions(){
+      return {
         autoLink: true,
         buttonLabels: 'fontawesome',
         disableEditing: true,
@@ -123,6 +127,7 @@ export default {
             'h5',
             'h6',
             'quote',
+            'pre',
             'justifyLeft',
             'justifyCenter',
             'justifyRight',
@@ -138,9 +143,7 @@ export default {
           updateOnEmptySelection: true
         }
       }
-    }
-  },
-  methods: {
+    },
     createNewSection(){
       let section = {
           title: `New Section ${moment().format('MMMM Do, YYYY')}`,
