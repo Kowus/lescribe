@@ -34,7 +34,7 @@ Vue.axios.interceptors.request.use(
   },
   function(error) {
     // Do something with request error
-    store.commit('setLoading', false);
+    // store.commit('setLoading', false);
     return Promise.reject(error);
   }
 );
@@ -45,7 +45,7 @@ Vue.axios.interceptors.response.use(
   },
   function(error) {
     // Do something with response error
-    store.commit('setLoading', false);
+    // store.commit('setLoading', false);
     return Promise.reject(error);
   }
 );
@@ -63,7 +63,7 @@ let mediaHandler = () => {
 };
 
 router.beforeEach((to, from, next) => {
-  // store.commit('setLoading', true);
+  store.commit('setLoading', true);
   if (to.matched.some(record => record.meta.guest) && Vue.auth.loggedIn()) {
     next({ path: '/dashboard' });
   } else if (
@@ -81,7 +81,7 @@ router.beforeEach((to, from, next) => {
 
 router.afterEach((to, from) => {
   mediaHandler();
-  // store.commit('setLoading', false);
+  store.commit('setLoading', false);
 });
 
 /* eslint-disable no-new */
