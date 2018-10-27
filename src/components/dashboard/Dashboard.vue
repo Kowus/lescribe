@@ -3,6 +3,24 @@
 <!--
     <dashboard-info-widgets></dashboard-info-widgets>
 -->
+    <vuestic-widget v-if="currentUser.projects&&currentUser.projects.length<1">
+    <div class="typo-headers">
+      <div class="text-center">
+      <h1>
+        <small>
+          It sure feels lonely here. 
+          <br>
+          <router-link to="/new">
+
+          <div class="btn btn-primary" style="border-radius:0; padding: 3px 8px; text-transform: none; font-size: 1em">
+            Create A Project
+          </div> 
+          </router-link>
+        </small>
+      </h1>
+      </div>
+    </div>
+    </vuestic-widget>
     <vuestic-widget class="no-padding no-v-padding" v-for="project in currentUser.projects" :project="project" :key="project._id">
 
       <div class="typo-headers">
@@ -55,48 +73,46 @@
 </template>
 
 <script>
-
-  import DashboardInfoWidgets from './DashboardInfoWidgets'
-  import UsersMembersTab from './users-and-members-tab/UsersMembersTab.vue'
-  import SetupProfileTab from './setup-profile-tab/SetupProfileTab.vue'
-  import FeaturesTab from './features-tab/FeaturesTab.vue'
-  import DataVisualisationTab from './data-visualisation-tab/DataVisualisation.vue'
-  import DashboardBottomWidgets from './DashboardBottomWidgets.vue'
-  import moment from 'moment'
-  export default {
-    name: 'dashboard',
-    components: {
-      DataVisualisationTab,
-      DashboardInfoWidgets,
-      UsersMembersTab,
-      SetupProfileTab,
-      FeaturesTab,
-      DashboardBottomWidgets
-    },
-    computed: {
-      currentUser(){
-        return this.$store.state.app.currentUser
-      }
-    },
-
-    methods: {
-      launchEpicmaxToast () {
-        this.showToast(`Let's work together!`, {
-          icon: 'fa-star-o',
-          position: 'top-right',
-          duration: Infinity,
-          action: {
-            text: 'Hire us',
-            href: 'http://epicmax.co/#/contact',
-            class: 'vuestic-toasted-link'
-          }
-        })
-      },
-      moment
+import DashboardInfoWidgets from "./DashboardInfoWidgets";
+import UsersMembersTab from "./users-and-members-tab/UsersMembersTab.vue";
+import SetupProfileTab from "./setup-profile-tab/SetupProfileTab.vue";
+import FeaturesTab from "./features-tab/FeaturesTab.vue";
+import DataVisualisationTab from "./data-visualisation-tab/DataVisualisation.vue";
+import DashboardBottomWidgets from "./DashboardBottomWidgets.vue";
+import moment from "moment";
+export default {
+  name: "dashboard",
+  components: {
+    DataVisualisationTab,
+    DashboardInfoWidgets,
+    UsersMembersTab,
+    SetupProfileTab,
+    FeaturesTab,
+    DashboardBottomWidgets
+  },
+  computed: {
+    currentUser() {
+      return this.$store.state.app.currentUser;
     }
-  }
+  },
 
+  methods: {
+    launchEpicmaxToast() {
+      this.showToast(`Let's work together!`, {
+        icon: "fa-star-o",
+        position: "top-right",
+        duration: Infinity,
+        action: {
+          text: "Hire us",
+          href: "http://epicmax.co/#/contact",
+          class: "vuestic-toasted-link"
+        }
+      });
+    },
+    moment
+  }
+};
 </script>
-<style lang="scss" scoped>
-  @import "../../sass/_variables.scss";
+<style lang='scss' scoped>
+@import "../../sass/_variables.scss";
 </style>
