@@ -33,7 +33,7 @@
             </div>
             <h5>Overview</h5>
             <div class="clearfix"></div>
-            <vuestic-medium-editor @initialized="handleEditorInitialization" :editor-options="editorOptions()" :contenteditable="cur_editing == 'overview'" v-html="project.overview" id="overview-content"/>
+            <vuestic-medium-editor @initialized="handleEditorInitialization" :contenteditable="cur_editing == 'overview'" v-html="project.overview" id="overview-content" @focus="cur_editing = 'overview'"/>
           </div>
         </div>
       </div>
@@ -66,7 +66,7 @@
         <hr class="small">
         <p id='apuskelenke'></p>
       </div>
-      <vuestic-medium-editor @initialized="handleSectionInitialization" :editor-options="editorOptions()" :contenteditable="cur_editing == section.link._id" v-html="section.link.body" :id="section.link._id"/>
+      <vuestic-medium-editor @initialized="handleSectionInitialization" :contenteditable="cur_editing == section.link._id" v-html="section.link.body" :id="section.link._id"/>
     </vuestic-widget>
 
 
@@ -75,14 +75,8 @@
 
 <script>
 /* eslint-disable */
-import Autolist from 'medium-editor-autolist'
-import Spreadsheet from 'medium-editor-handsontable'
 import moment from 'moment'
 let {randomBytes} = require('crypto')
-let spreadsheetOptions = {
-            manualColumnResize: true,
-            manualRowResize: true,
-          }
 
 
 export default {
@@ -104,44 +98,8 @@ export default {
       return {
         autoLink: true,
         buttonLabels: 'fontawesome',
-        disableEditing: true,
-        extensions: {
-          spreadsheet: new Spreadsheet(spreadsheetOptions),
-          // spreadsheet: new MediumEditorSpreadsheet(spreadsheetOptions),
-          autolist: new Autolist()
-        },
-        spellcheck: true,
-        toolbar: {
-          buttons: [
-            'bold',
-            'italic',
-            'underline',
-            'strikethrough',
-            'subscript',
-            'superscript',
-            'anchor',
-            'h1',
-            'h2',
-            'h3',
-            'h4',
-            'h5',
-            'h6',
-            'quote',
-            'pre',
-            'justifyLeft',
-            'justifyCenter',
-            'justifyRight',
-            'justifyFull',
-            'outdent',
-            'indent',
-            'orderedlist',
-            'unorderedlist',
-            'spreadsheet'
-          ],
-          static: true,
-          sticky: true,
-          updateOnEmptySelection: true
-        }
+       
+        
       }
     },
     createNewSection(){

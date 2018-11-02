@@ -6,6 +6,21 @@
 
 <script>
   import MediumEditor from 'medium-editor'
+  import Autolist from 'medium-editor-autolist'
+  import Spreadsheet from 'medium-editor-handsontable'
+
+  var UploadButton = MediumEditor.Extension.extend({
+    name: 'uploader',
+    init: function(){
+      this.button = this.document.createElement('button');
+      this.button.classList.add('medium-editor-action');
+      this.button.innerHTML = '<i class="fa fa-image"></i>';
+      this.button.title = 'Image Upload';
+    },
+    getButton: function(){
+      return this.button;
+    }
+  })
 
   export default {
     name: 'vuestic-medium-editor',
@@ -15,18 +30,43 @@
         type: Object,
         default: () => {
           return {
-            buttonLabels: 'fontawesome',
             autoLink: true,
+            buttonLabels: 'fontawesome',
+            disableEditing: true,
+            extensions: {
+              autolist: new Autolist(),
+              uploader: new UploadButton(),
+              spreadsheet: new Spreadsheet({
+                manualColumnResize: true,
+                manualRowResize: true,
+              })
+            },
+            spellcheck: true,
+            targetBlank: true,
             toolbar: {
               buttons: [
                 'bold',
                 'italic',
                 'underline',
-                'anchor',
+                'strikethrough',
+                'subscript',
+                'superscript',
                 'h1',
                 'h2',
-                'h3'
-              ]
+                'h3',
+                'justifyLeft',
+                'justifyCenter',
+                'justifyRight',
+                'outdent',
+                'indent',
+                'orderedlist',
+                'unorderedlist',
+                'spreadsheet',
+                'uploader'
+              ],
+              static: true,
+              sticky: true,
+              updateOnEmptySelection: true
             }
           }
         }
@@ -64,7 +104,8 @@
   .vuestic-medium-editor {
     padding: 5px 20px;
     &:focus {
-      outline: 1px solid rgba(0,0,0,.1);
+      padding: 20px 20px;
+      outline: 1px solid rgba(0,0,0,.06);
     }
   }
 </style>
