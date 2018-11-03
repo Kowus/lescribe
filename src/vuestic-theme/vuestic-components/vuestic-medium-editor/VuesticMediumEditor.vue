@@ -16,9 +16,14 @@
       this.button.classList.add('medium-editor-action');
       this.button.innerHTML = '<i class="fa fa-image"></i>';
       this.button.title = 'Image Upload';
+      this.on(this.button, 'click', this.handleClick.bind(this));
     },
     getButton: function(){
       return this.button;
+    },
+    handleClick: function(event){
+      let fileUploader = document.getElementById('fileUploadDialog');
+      fileUploader.click();
     }
   })
 

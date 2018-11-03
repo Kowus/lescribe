@@ -69,7 +69,7 @@
       <vuestic-medium-editor @initialized="handleSectionInitialization" :contenteditable="cur_editing == section.link._id" v-html="section.link.body" :id="section.link._id"/>
     </vuestic-widget>
 
-
+    <input type="file" id="fileUploadDialog" name="files[]" multiple style="display: none;">
   </div>
 </template>
 

@@ -73,6 +73,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import DashboardInfoWidgets from "./DashboardInfoWidgets";
 import UsersMembersTab from "./users-and-members-tab/UsersMembersTab.vue";
 import SetupProfileTab from "./setup-profile-tab/SetupProfileTab.vue";
