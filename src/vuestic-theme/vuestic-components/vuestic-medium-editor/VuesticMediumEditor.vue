@@ -24,6 +24,12 @@
     handleClick: function(event){
       let fileUploader = document.getElementById('fileUploadDialog');
       fileUploader.click();
+      /*
+       * When uploader content changes, post to server
+       * Display loading mask
+       * When upload is done, get the object url
+       * Put url at caret position as src attribute to image object
+      */
     }
   })
 

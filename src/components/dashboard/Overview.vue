@@ -9,8 +9,25 @@
             <span class="badge badge-dark">{{moment(project.stats.startDate).format('MMM Do, YYYY')}}</span>
             <span class="badge badge-success" v-if="project.completed.status">{{'complete' | translate}}</span>
             <span class="badge badge-warning" v-else>{{'incomplete' | translate}}</span>
+            
           </div>
-          <h3>{{project.title}}</h3>
+          
+          <h3>
+            {{project.title}}
+            <small class="settings-menu-dropdown">
+              <div class="dropdown d-inline-flex" v-dropdown>
+                <span type="button" class="dropdown-toggle theme-toggle" id="dropdownMenuButton" data-toggle="dropdown">
+                  <!-- Settings -->
+                  <i class="vuestic-icon vuestic-icon-settings"></i>
+                </span>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <div class="dropdown-menu-content">
+                    <a href="#" class="dropdown-item" @click.prevent="showCollaboratorModal()"><i class="entypo entypo-users" style="padding-right: 5px;"> </i> collaborators</a>
+                  </div>
+                </div>
+              </div>
+            </small>
+          </h3>
           <div style="margin-left:3px; opacity:0.9;">
             <small class="text-info" style="margin-right:5px;padding:2px 5px;" :key="tag" v-for="tag in project.tags" :tag="tag">
               {{tag}}
@@ -70,6 +87,14 @@
     </vuestic-widget>
 
     <input type="file" id="fileUploadDialog" name="files[]" multiple style="display: none;">
+
+    <vuestic-modal :show.sync="show" v-bind:small="true" v-bind:force="true" ref="collaboratorModal" :cancelClass="'none'"
+                   okText="close">
+      <div slot="title">Invite</div>
+      <div>
+        {{'modal.staticMessage' | translate}}
+      </div>
+    </vuestic-modal>
   </div>
 </template>
 
@@ -97,10 +122,11 @@ export default {
     editorOptions(){
       return {
         autoLink: true,
-        buttonLabels: 'fontawesome',
-       
-        
+        buttonLabels: 'fontawesome',               
       }
+    },
+    showCollaboratorModal(){
+      this.$refs.collaboratorModal.open()
     },
     createNewSection(){
       let section = {
@@ -274,6 +300,14 @@ export default {
   cursor: pointer;
   &:hover {
     color: #e34a4a
+  }
+}
+.settings-menu-dropdown {
+  color: #ccc;
+  cursor: pointer;
+  font-size: 12px;
+  &:hover {
+    color: #333
   }
 }
 </style>
