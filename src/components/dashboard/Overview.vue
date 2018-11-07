@@ -88,11 +88,19 @@
 
     <input type="file" id="fileUploadDialog" name="files[]" multiple style="display: none;">
 
-    <vuestic-modal :show.sync="show" v-bind:small="true" v-bind:force="true" ref="collaboratorModal" :cancelClass="'none'"
+    <vuestic-modal :show.sync="show" v-bind:small="false" v-bind:force="true" ref="collaboratorModal" :cancelClass="'none'"
                    okText="close">
       <div slot="title">Invite</div>
       <div>
-        {{'modal.staticMessage' | translate}}
+        <!-- {{'modal.staticMessage' | translate}} -->
+        <div class="form-group with-icon-left">
+          <div class="input-group">
+            <input id="input-icon-left" name="input-icon-left" required/>
+            <i class="entypo entypo-user icon-left input-icon"></i>
+            <label class="control-label" for="input-icon-left">{{'forms.inputs.inputWithIcon' | translate}}</label>
+            <i class="bar"></i>
+          </div>
+        </div>
       </div>
     </vuestic-modal>
   </div>
