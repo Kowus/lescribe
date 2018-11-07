@@ -95,7 +95,7 @@
         <!-- {{'modal.staticMessage' | translate}} -->
         <div class="form-group with-icon-left">
           <div class="input-group">
-            <input id="input-icon-left" name="input-icon-left" required/>
+            <input id="input-icon-left" name="input-icon-left" required v-model="collabo"/>
             <i class="entypo entypo-user icon-left input-icon"></i>
             <label class="control-label" for="input-icon-left">{{'forms.inputs.inputWithIcon' | translate}}</label>
             <i class="bar"></i>
@@ -123,7 +123,9 @@ export default {
       editor: {},
       sections:[],
       cur_editing: '',
-      edit_title: ''
+      edit_title: '',
+      collabo: '',
+      show: true
     }
   },
   methods: {
@@ -292,10 +294,16 @@ export default {
       }).catch((err) => {
         // nothing
       });
+    },
+    getCollaborator(name){
+      this.$http.get(`/search`,{params:{target: 'user', content: name}})
     }
   },
   watch: {
-    $route: 'getProject'
+    $route: 'getProject',
+    collabo(){
+      this.getCollaborator(this.collabo)
+    }
   }
 
 }

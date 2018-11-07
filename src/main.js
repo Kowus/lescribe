@@ -24,7 +24,6 @@ Vue.use(Auth);
 Vue.axios.defaults.baseURL = process.env.API;
 Vue.axios.interceptors.request.use(
   function(config) {
-    store.commit('setLoading', true);
     // Do something before request is sent
     let token = Vue.auth.getToken();
     if (token) {
@@ -34,18 +33,15 @@ Vue.axios.interceptors.request.use(
   },
   function(error) {
     // Do something with request error
-    // store.commit('setLoading', false);
     return Promise.reject(error);
   }
 );
 Vue.axios.interceptors.response.use(
   function(response) {
-    store.commit('setLoading', false);
     return response;
   },
   function(error) {
     // Do something with response error
-    // store.commit('setLoading', false);
     return Promise.reject(error);
   }
 );
