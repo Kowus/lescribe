@@ -189,6 +189,12 @@ export default {
     showCollaboratorModal(){
       this.$refs.collaboratorModal.open()
     },
+    sendInvitation(id, role){
+      this.$http.post(`/projects/${this.project._id}`, {
+        user: id,
+        role: readwrite
+      })
+    },
     createNewSection(){
       let section = {
           title: `New Section ${moment().format('MMMM Do, YYYY')}`,
