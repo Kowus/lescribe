@@ -93,12 +93,62 @@
       <div slot="title">Invite</div>
       <div>
         <!-- {{'modal.staticMessage' | translate}} -->
+
         <div class="form-group with-icon-left">
           <div class="input-group">
             <input id="input-icon-left" name="input-icon-left" required v-model="collabo"/>
             <i class="entypo entypo-user icon-left input-icon"></i>
-            <label class="control-label" for="input-icon-left">{{'forms.inputs.inputWithIcon' | translate}}</label>
+            <label class="control-label" for="input-icon-left">Username, Full name, or Email</label>
             <i class="bar"></i>
+            <div class="collab-results">
+              <!-- {{collab_results}} -->
+              <small class="help">
+              <table class="table table-hover" v-if="collabo">
+                <tr v-for="user in collab_results" :key="user" :user="user" class="pick-collaborator">
+                  <td>
+                    <img :src="user.profile_image || 'http://i.imgur.com/nfa5itq.png'" style="width: 40px; height: 40px; border-radius: 50px;"><br>
+                    <router-link to="/">
+                      @{{user.username}}
+                    </router-link>
+                    
+                  </td>
+                  <td>
+                    <span class="text-capitalize">
+                      {{`${user.given_name} ${user.family_name}`}}
+                      <br>
+                    </span>
+                    {{user.email}}
+                  </td>
+                  <hr>
+                </tr>
+              </table>
+              </small>
+            </div>
+            <small class="help text-secondary">
+              <br>
+              <p>
+                <em>These people already have access to this project:</em>
+              </p>
+              <table class="table">
+                <tbody>
+                  <tr v-for="collaborator in project.team" :key="collaborator.user._id" :collaborator="collaborator">
+                    <td>
+                        <img :src="collaborator.user.profile_image || 'http://i.imgur.com/nfa5itq.png'" style="width: 50px; height: 50px; border-radius: 50px;">
+                    </td>
+                    <td>
+                      {{`${collaborator.user.given_name} ${collaborator.user.family_name}`}}
+                      <br>
+                      <router-link to="/">
+                        @{{collaborator.user.username}}
+                      </router-link>
+                    </td>
+                    <td class="text-capitalize">
+                      {{collaborator.role}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </small>
           </div>
         </div>
       </div>
@@ -125,7 +175,8 @@ export default {
       cur_editing: '',
       edit_title: '',
       collabo: '',
-      show: true
+      show: true,
+      collab_results: []
     }
   },
   methods: {
@@ -297,6 +348,12 @@ export default {
     },
     getCollaborator(name){
       this.$http.get(`/search`,{params:{target: 'user', content: name}})
+      .then((results) => {
+        this.collab_results = results.data;
+      })
+      .catch((err) => {
+
+      })
     }
   },
   watch: {
@@ -324,6 +381,23 @@ export default {
   font-size: 12px;
   &:hover {
     color: #333
+  }
+}
+
+.collab-results{
+  height: 200px;
+  padding: 10px 0;
+  // border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow-y: scroll;
+  background-color: #fff;
+  box-shadow: 3px 3px 5px #555;
+
+  .pick-collaborator{
+    padding: 0;
+    cursor: pointer;
+    &:hover{
+      background: rgba(200,200,200,0.2)
+    }
   }
 }
 </style>

@@ -24,7 +24,8 @@ const state = {
     }
   },
   isLoading: true,
-  currentUser: {}
+  currentUser: {},
+  makingAPICall: false
 };
 
 const mutations = {
@@ -47,6 +48,9 @@ const mutations = {
   },
   clearCurrentUser(state) {
     state.currentUser = {};
+  },
+  makingREST(state, value) {
+    state.makingAPICall = value;
   }
 };
 

@@ -25,6 +25,7 @@ Vue.axios.defaults.baseURL = process.env.API;
 Vue.axios.interceptors.request.use(
   function(config) {
     // Do something before request is sent
+    store.commit('makingREST', true);
     let token = Vue.auth.getToken();
     if (token) {
       config.headers.common['Authorization'] = `Bearer ${token}`;
@@ -33,15 +34,18 @@ Vue.axios.interceptors.request.use(
   },
   function(error) {
     // Do something with request error
+    store.commit('makingREST', false);
     return Promise.reject(error);
   }
 );
 Vue.axios.interceptors.response.use(
   function(response) {
+    store.commit('makingREST', false);
     return response;
   },
   function(error) {
     // Do something with response error
+    store.commit('makingREST', false);
     return Promise.reject(error);
   }
 );
