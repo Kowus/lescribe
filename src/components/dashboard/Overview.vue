@@ -120,12 +120,15 @@
                     {{user.email}}
                   </td>
                   <td>
-                    <v-popover>
-                      <button>Crick Me</button>
-                      <template slot="popover">
-                        <a v-close-popover>Close</a>
-                      </template>
-                    </v-popover>
+                    <vuestic-radio-button
+                      :label="collab_role"
+                      :id="'readwrite'"
+                      :value="'readwrite'"
+                      :name="'readwrite'"
+                      v-model="collab_role"/>
+                  </td>
+                  <td>
+                    <a href="#">Add</a>
                   </td>
                   <hr>
                 </tr>
@@ -184,7 +187,8 @@ export default {
       edit_title: '',
       collabo: '',
       show: true,
-      collab_results: []
+      collab_results: [],
+      collab_role:'readwrite'
     }
   },
   methods: {
