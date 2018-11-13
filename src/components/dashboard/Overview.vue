@@ -104,7 +104,7 @@
               <!-- {{collab_results}} -->
               <small class="help">
               <table class="table table-hover" v-if="collabo">
-                <tr v-for="user in collab_results" :key="user" :user="user" class="pick-collaborator">
+                <tr v-for="user in collab_results" :key="user._id" :user="user" class="pick-collaborator">
                   <td>
                     <img :src="user.profile_image || 'http://i.imgur.com/nfa5itq.png'" style="width: 40px; height: 40px; border-radius: 50px;"><br>
                     <router-link to="/">
@@ -118,6 +118,14 @@
                       <br>
                     </span>
                     {{user.email}}
+                  </td>
+                  <td>
+                    <v-popover>
+                      <button>Crick Me</button>
+                      <template slot="popover">
+                        <a v-close-popover>Close</a>
+                      </template>
+                    </v-popover>
                   </td>
                   <hr>
                 </tr>
