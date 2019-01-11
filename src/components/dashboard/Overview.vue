@@ -86,7 +86,7 @@
       <vuestic-medium-editor @initialized="handleSectionInitialization" :contenteditable="cur_editing == section.link._id" v-html="section.link.body" :id="section.link._id"/>
     </vuestic-widget>
 
-    <input type="file" id="fileUploadDialog" name="files[]" multiple style="display: none;">
+    <input type="file" accept="image/*" id="fileUploadDialog" name="files[]" style="display: none;">
 
     <vuestic-modal :show.sync="show" v-bind:small="false" v-bind:force="true" ref="collaboratorModal" :cancelClass="'none'"
                    okText="close">

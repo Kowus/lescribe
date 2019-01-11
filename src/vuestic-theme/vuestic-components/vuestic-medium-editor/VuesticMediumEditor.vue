@@ -24,6 +24,33 @@
     handleClick: function(event){
       let fileUploader = document.getElementById('fileUploadDialog');
       fileUploader.click();
+      fileUploader.onchange = function() {
+        const url = process.env.API;
+        const files = fileUploader.files;
+        const formData = new FormData();
+        formData.append('files[]', files[0]);
+        if (window.getSelection) {
+          var sel = window.getSelection();
+          if (sel.getRangeAt && sel.rangeCount) {
+            var range = sel.getRangeAt(0);
+            fetch(
+              `${url}/upload`,
+              {
+                method: 'POST',
+                body: formData,
+                headers: new Headers({
+                  'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                })
+              }
+            ).then(response => response.json())
+              .then(responseData => {
+                console.log(responseData)
+                range.insertNode(document.createTextNode(responseData));
+                fileUploader.files = null;
+              })
+          }
+        }
+      }
       /*
        * When uploader content changes, post to server
        * Display loading mask
