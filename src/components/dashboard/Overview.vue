@@ -93,7 +93,14 @@
       <div slot="title">Invite</div>
       <div>
         <!-- {{'modal.staticMessage' | translate}} -->
-
+        <div style="width: 20%" class="float-right">
+          <div class="collab-role" style="width: 100%; height: 100%;">
+            <span v-for="(role, index) in collab_roles" :key="role.id" :role="role" v-if="collab_role === role.id" @click.prevent="toggleRole(index)">
+              <i class="entypo" :class="`entypo-${role.icon}`"> </i>  {{role.label}}
+            </span>
+          </div>
+        </div>
+        <hr style="clear:both; opacity: 0;">
         <div class="form-group with-icon-left">
           <div class="input-group">
             <input id="input-icon-left" name="input-icon-left" required v-model="collabo"/>
@@ -120,15 +127,7 @@
                     {{user.email}}
                   </td>
                   <td>
-                    <vuestic-radio-button
-                      :label="collab_role"
-                      :id="'readwrite'"
-                      :value="'readwrite'"
-                      :name="'readwrite'"
-                      v-model="collab_role"/>
-                  </td>
-                  <td>
-                    <a href="#">Add</a>
+                    <a href="#" @click.prevent="sendInvitation(user)">Add</a>
                   </td>
                   <hr>
                 </tr>
@@ -188,7 +187,27 @@ export default {
       collabo: '',
       show: true,
       collab_results: [],
-      collab_role:'readwrite'
+      collab_role:'readwrite',
+      collab_roles: [
+        {
+          role: 'readwrite',
+          id: 'readwrite',
+          label: 'Edit',
+          icon: 'pencil'
+        },
+        {
+          role: 'readonly',
+          id: 'readonly',
+          label: 'View',
+          icon: 'eye'
+        },
+        {
+          role: 'admin',
+          id: 'admin',
+          label: 'Admin',
+          icon: 'cog'
+        }
+      ]
     }
   },
   methods: {
@@ -201,10 +220,25 @@ export default {
     showCollaboratorModal(){
       this.$refs.collaboratorModal.open()
     },
-    sendInvitation(id, role){
-      this.$http.post(`/projects/${this.project._id}`, {
-        user: id,
-        role: readwrite
+    toggleRole(index){
+      let roleLength = this.collab_roles.length;
+      let modulo_index = (Number(index) +1) % roleLength;
+      const {role} = this.collab_roles[modulo_index];
+      this.collab_role = role;
+    },
+    sendInvitation(user){
+      this.$http.post(`/projects/${this.project._id}/invite`, {
+        user: user._id,
+        role: this.collab_role
+      }).then(res=>{
+        this.project.team.push({
+          _id: user._id,
+          family_name:user.family_name,
+          given_name: user.given_name,
+          role: this.collab_role,
+          username: user.username
+        });
+        alert(res.data);
       })
     },
     createNewSection(){
@@ -234,7 +268,7 @@ export default {
           project: this.project._id,
           content: section.link.title,
           target: 'title'
-        }
+        };
       this.updateProject({route,payload})
         .then(res=>{
           console.log('Success!!!')
@@ -418,4 +452,23 @@ export default {
     }
   }
 }
+  .collab-role{
+    color: #777;
+    padding: 4px 2px;
+    text-align: center;
+    background-color: transparent;
+    box-shadow: 1px 2px 1px #ddd;
+    -moz-box-shadow: 1px 2px 1px #ddd;
+    -o-box-shadow: 1px 2px 1px #ddd;
+    -webkit-box-shadow: 1px 2px 1px #ddd;
+    cursor: pointer;
+    font-weight: lighter;
+    &:hover{
+      font-weight: 700;
+      box-shadow: 2px 2px 1px #ddd;
+      -moz-box-shadow: 2px 2px 1px #ddd;
+      -o-box-shadow: 2px 2px 1px #ddd;
+      -webkit-box-shadow: 2px 2px 1px #ddd;
+    }
+  }
 </style>
