@@ -44,8 +44,11 @@
               }
             ).then(response => response.json())
               .then(responseData => {
-                console.log(responseData)
-                range.insertNode(document.createTextNode(responseData));
+                console.log(responseData[0]);
+                var newImage = new Image(100, 100);
+                newImage.src = responseData[0].path;
+                // range.insertNode(document.createTextNode(responseData));
+                range.insertNode(newImage);
                 fileUploader.files = null;
               })
           }
